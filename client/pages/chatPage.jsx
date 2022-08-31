@@ -21,8 +21,8 @@ function ChatConnection({ initialMessages, user }) {
       console.log("Opened", event);
     };
     ws.onmessage = (event) => {
-      const { user, message, created } = JSON.parse(event.data);
-      setMessages((messages) => [...messages, { message, user, created }]);
+      const { user, message, created, _id } = JSON.parse(event.data);
+      setMessages((messages) => [...messages, { message, user, created, _id }]);
     };
     setWs(ws);
   }, []);
@@ -61,6 +61,42 @@ function ChatHeader({ name }) {
   );
 }
 
+function ChatMessage({ message, user, created, _id }) {
+  const date = new Date(created);
+  const { deleteMessage } = useContext(ChatApiContext);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: "0.8em",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gridGap: "1em",
+          paddingBottom: "0.2em",
+        }}
+      >
+        <strong>{user.name}</strong>
+        <small
+          style={{ fontSize: "0.8em", color: "var(--light)" }}
+        >{`${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`}</small>
+      </div>
+      {message}
+      <button
+        onClick={async () => {
+          await deleteMessage(_id);
+        }}
+      >
+        Delete
+      </button>
+    </div>
+  );
+}
+
 export function ChatComponent({ messages, onNewMessage }) {
   const [message, setMessage] = useState("");
   function handleSubmit(e) {
@@ -72,34 +108,15 @@ export function ChatComponent({ messages, onNewMessage }) {
     <div className={"chatWindow"}>
       <ChatHeader name={"main"} />
       <div className={"scroll"}>
-        {messages.map(({ message, user, created }, index) => {
-          const date = new Date(created);
-
-          return (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginBottom: "0.8em",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  gridGap: "1em",
-                  paddingBottom: "0.2em",
-                }}
-              >
-                <strong>{user.name}</strong>
-                <small
-                  style={{ fontSize: "0.8em", color: "var(--light)" }}
-                >{`${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`}</small>
-              </div>
-              {message}
-            </div>
-          );
-        })}
+        {messages.map(({ message, user, created, _id }, index) => (
+          <ChatMessage
+            message={message}
+            user={user}
+            created={created}
+            _id={_id}
+            key={`msg-${index}`}
+          />
+        ))}
       </div>
       <footer>
         <form onSubmit={handleSubmit}>

@@ -53,9 +53,9 @@ wsServer.on("connection", (socket) => {
   sockets.push(socket);
 
   socket.on("message", async (msg) => {
-    const { message, created, user } = await handleChatMessage(msg);
+    const { message, created, user, _id } = await handleChatMessage(msg);
     for (const recipient of sockets) {
-      recipient.send(JSON.stringify({ message, created, user }));
+      recipient.send(JSON.stringify({ message, created, user, _id }));
     }
   });
 });

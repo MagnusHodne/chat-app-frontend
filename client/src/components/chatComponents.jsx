@@ -33,6 +33,7 @@ function ChatMessageActions({ author, handleDelete }) {
     >
       <ChatMessageAction
         icon={"fa-solid fa-heart"}
+        className={"hover:text-amber-500"}
         onClick={() => alert("Not yet implemented")}
       />
 
@@ -40,6 +41,7 @@ function ChatMessageActions({ author, handleDelete }) {
         <>
           <ChatMessageAction
             icon={"fa-solid fa-pencil"}
+            className={"hover:text-lime-500"}
             onClick={() => alert("Not yet implemented")}
           />
           <ChatMessageAction

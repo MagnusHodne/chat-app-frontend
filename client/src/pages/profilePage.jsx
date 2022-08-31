@@ -30,10 +30,9 @@ function ProfileCard({ userinfo, initBio }) {
     console.log("update bio from here");
   }
   return (
-    <div className={"profile-card"}>
-      {/*<Button to={"/"} title={"Back"} />*/}
+    <div>
       {userinfo.picture && <ProfilePicture url={userinfo.picture} />}
-      <h1>{`${userinfo.name}`}</h1>
+      <h1 className={"text-2xl"}>{`${userinfo.name}`}</h1>
       <form onSubmit={handleSubmit}>
         <label>
           <strong>Bio</strong>
@@ -52,6 +51,10 @@ function ProfileCard({ userinfo, initBio }) {
 
 function ProfilePicture({ url }) {
   return (
-    <img className={"profile-picture"} src={url} alt={"profile picture"} />
+    <img
+      className={"rounded-full border-2 border-solid border-thischord-100"}
+      src={url}
+      alt={"profile picture"}
+    />
   );
 }

@@ -4,7 +4,7 @@ import { UserContext } from "../userContext";
 
 export function ChatHeader({ name }) {
   return (
-    <div className={"chat-header icon-with-text"}>
+    <div className={"chat-header flex gap-2"}>
       <FAIcon icon={"fa-solid fa-hashtag"} />
       <h3>{name}</h3>
     </div>

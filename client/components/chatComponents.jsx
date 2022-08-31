@@ -10,9 +10,16 @@ export function ChatHeader({ name }) {
   );
 }
 
-function ChatMessageActions({ user }) {}
+function ChatMessageActions({ user, handleDelete }) {
+  return (
+    <div className={"message-actions"}>
+      <div onClick={() => alert("Not yet implemented")}>Edit</div>
+      <div onClick={() => handleDelete()}>Delete</div>
+    </div>
+  );
+}
 
-function ChatMessage({ message, user, created, _id, handleDelete }) {
+function ChatMessage({ message, user, created, _id, onDeleteMessage }) {
   const date = new Date(created);
 
   return (
@@ -24,9 +31,7 @@ function ChatMessage({ message, user, created, _id, handleDelete }) {
         </small>
       </div>
       {message}
-      <button className={"message-actions"} onClick={() => handleDelete(_id)}>
-        Delete
-      </button>
+      <ChatMessageActions handleDelete={() => onDeleteMessage(_id)} />
     </div>
   );
 }
@@ -65,7 +70,7 @@ export function ChatComponent({
             created={created}
             key={_id}
             _id={_id}
-            handleDelete={onDeleteMessage}
+            onDeleteMessage={onDeleteMessage}
           />
         ))}
       </div>

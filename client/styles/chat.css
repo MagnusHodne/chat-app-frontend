@@ -23,10 +23,12 @@
 
 .message-actions {
   position: relative;
+  display: flex;
+  flex-direction: row;
 }
 
 .message-container:hover .message-actions {
-  display: block;
+  display: flex;
 }
 
 .chat-window {

@@ -11,10 +11,10 @@ export function ChatHeader({ name }) {
   );
 }
 
-function ChatMessageAction({ icon, onClick }) {
+function ChatMessageAction({ icon, onClick, className }) {
   return (
     <button
-      className={"border-none px-2 py-1 hover:bg-thischord-500"}
+      className={`border-none px-2 py-1 hover:bg-thischord-500 ${className}`}
       onClick={() => onClick()}
     >
       <FAIcon icon={icon} />
@@ -43,8 +43,9 @@ function ChatMessageActions({ author, handleDelete }) {
             onClick={() => alert("Not yet implemented")}
           />
           <ChatMessageAction
-            icon={"fa-solid fa-trash-can text-red-600"}
+            icon={"fa-solid fa-trash-can"}
             onClick={() => handleDelete()}
+            className={"text-red-600 hover:bg-red-600 hover:text-white"}
           />
         </>
       )}

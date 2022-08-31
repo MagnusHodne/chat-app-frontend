@@ -16,7 +16,11 @@ function UserActions() {
 
   return (
     <>
-      <Button to={"/login/endsession"} title={"Log out"} className={"danger"} />
+      <Button
+        to={"/login/endsession"}
+        title={"Log out"}
+        className={"hover:bg-red-800"}
+      />
     </>
   );
 }
@@ -29,7 +33,7 @@ export function Header() {
     >
       <div className={"flex flex-row items-center gap-3"}>
         <FAIcon icon={"fa-solid fa-gamepad"} />
-        <h1>Thischord</h1>
+        <h1 className={"text-2xl font-black"}>Thischord</h1>
       </div>
       <div>
         <UserActions />

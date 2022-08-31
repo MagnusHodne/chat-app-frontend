@@ -8,7 +8,6 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  margin-bottom: 0.8em;
 }
 
 .message-container:hover {
@@ -19,11 +18,15 @@
   display: flex;
   grid-gap: 1em;
   padding-bottom: 0.2em;
+  margin-top: 1em;
 }
 
 .message-time {
   font-size: 0.8em;
   color: var(--light);
+}
+.message-text {
+  padding: 0.1em 0;
 }
 
 .message-actions {
@@ -53,13 +56,20 @@
 .chat-window {
   display: grid;
   height: 100%;
-  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "header" "messages" "footer";
+  grid-template-rows: 1em 1fr auto;
 }
 
 .chat-window footer form {
   display: flex;
   align-items: stretch;
   flex-direction: row;
+}
+
+.chat-window footer * {
+  height: 100%;
+  margin: 0;
+  column-gap: 0.3em;
 }
 
 .chat-window footer form input {

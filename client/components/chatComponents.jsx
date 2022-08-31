@@ -40,7 +40,21 @@ function ChatMessageActions({ author, handleDelete }) {
 }
 
 function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
-  const date = new Date(info.created);
+  const created = new Date(info.created);
+  let date;
+  if (Date.now() - created.getTime() < 1000 * 3600 * 24) {
+    date = "Today";
+  } else if (Date.now() - created.getTime() < 1000 * 3600 * 48) {
+    date = "Yesterday";
+  } else {
+    date = created.toDateString();
+  }
+  const hours =
+    created.getHours() < 10 ? `0${created.getHours()}` : created.getHours();
+  const minutes =
+    created.getMinutes() < 10
+      ? `0${created.getMinutes()}`
+      : created.getMinutes();
   const [showActions, setShowActions] = useState(false);
 
   return (
@@ -59,24 +73,15 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
         <div className={"message-info"}>
           <strong>{info.user.name}</strong>
           <small className={"message-time"}>
-            {`${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`}
+            {`${date} ${hours}:${minutes}`}
           </small>
         </div>
       )}
-      {message}
+      <div className={"message-text"}>{message}</div>
     </div>
   );
 }
 
-/**
- *
- * @param messages List of messages
- * @param onNewMessage Function for handling saves
- * @param onDeleteMessage Function for handling deletes
- * @param chatRoom Name of the chat room
- * @returns {JSX.Element}
- * @constructor
- */
 export function ChatComponent({
   messages,
   onNewMessage,

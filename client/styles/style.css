@@ -5,6 +5,7 @@
   --dark: #36393f;
   --sidebar: #2c2f33;
   --medium: #43474b;
+  --hover: #565c61;
   --light: #99aab5;
   --text: #b7c2ce;
   --white: #f1f1f1;
@@ -129,7 +130,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #43474b;
+  background-color: var(--medium);
   color: var(--light);
   padding: 1em;
   margin: 0.3em;
@@ -138,7 +139,7 @@ body {
 }
 
 .button:hover {
-  background-color: #565c61;
+  background-color: var(--hover);
 }
 
 .button a {

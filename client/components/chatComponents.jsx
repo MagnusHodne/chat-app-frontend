@@ -13,25 +13,34 @@ export function ChatHeader({ name }) {
 function ChatMessageActions({ user, handleDelete }) {
   return (
     <div className={"message-actions"}>
-      <div onClick={() => alert("Not yet implemented")}>Edit</div>
-      <div onClick={() => handleDelete()}>Delete</div>
+      <button
+        className={"message-action"}
+        onClick={() => alert("Not yet implemented")}
+      >
+        Edit
+      </button>
+      <button className={"message-action"} onClick={() => handleDelete()}>
+        Delete
+      </button>
     </div>
   );
 }
 
-function ChatMessage({ message, user, created, _id, onDeleteMessage }) {
-  const date = new Date(created);
+function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
+  const date = new Date(info.created);
 
   return (
     <div className={"message-container"}>
-      <div className={"message-info"}>
-        <strong>{user.name}</strong>
-        <small className={"message-time"}>
-          {`${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`}
-        </small>
-      </div>
+      <ChatMessageActions handleDelete={() => onDeleteMessage(info._id)} />
+      {displayInfo && (
+        <div className={"message-info"}>
+          <strong>{info.user.name}</strong>
+          <small className={"message-time"}>
+            {`${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`}
+          </small>
+        </div>
+      )}
       {message}
-      <ChatMessageActions handleDelete={() => onDeleteMessage(_id)} />
     </div>
   );
 }
@@ -63,16 +72,30 @@ export function ChatComponent({
     <div className={"chat-window"}>
       <ChatHeader name={chatRoom} />
       <div className={"scroll"}>
-        {messages.map(({ message, user, created, _id }) => (
-          <ChatMessage
-            message={message}
-            user={user}
-            created={created}
-            key={_id}
-            _id={_id}
-            onDeleteMessage={onDeleteMessage}
-          />
-        ))}
+        {messages.map(({ message, user, created, _id }, index) => {
+          let displayInfo = false;
+          if (index === 0) {
+            displayInfo = true;
+          } else if (messages[index - 1].user.sub !== user.sub) {
+            displayInfo = true;
+          } else if (
+            new Date(created).getTime() -
+              new Date(messages[index - 1].created).getTime() >
+            1000 * 3600
+          ) {
+            displayInfo = true;
+          }
+
+          return (
+            <ChatMessage
+              message={message}
+              info={{ user, created, _id }}
+              displayInfo={displayInfo}
+              key={_id}
+              onDeleteMessage={onDeleteMessage}
+            />
+          );
+        })}
       </div>
       <footer>
         <form onSubmit={handleSubmit}>

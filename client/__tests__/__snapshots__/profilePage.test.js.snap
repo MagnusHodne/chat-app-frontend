@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile page should match snapshot 1`] = `
+<div>
+  <div
+    class="loading-component"
+  >
+    <div>
+      <span
+        class="fa-solid fa-spinner fa-spin-pulse"
+      />
+      <p>
+        Fetching user bio, please wait...
+      </p>
+    </div>
+  </div>
+</div>
+`;

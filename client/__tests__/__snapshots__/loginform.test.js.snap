@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm matches snapshot 1`] = `
+<div>
+  <div
+    class="page-fullsize"
+  >
+    <header
+      class="header"
+    >
+      <div
+        class="title"
+      >
+        <i
+          class="icon fa-solid fa-gamepad"
+        />
+        <h1>
+          Thischord
+        </h1>
+      </div>
+      <div />
+    </header>
+    <div
+      class="content"
+    >
+      <div
+        class="login-buttons"
+      >
+        <h1>
+          Welcome!
+        </h1>
+        <p>
+          Please log in
+        </p>
+        <div
+          style="display: flex; flex-direction: column; width: 15em;"
+        >
+          <button
+            class="button "
+          >
+            <i
+              class="icon fa-brands fa-google"
+            />
+            Log in with Google
+          </button>
+          <button
+            class="button "
+          >
+            <i
+              class="icon fa-brands fa-microsoft"
+            />
+            Log in with Active Directory
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

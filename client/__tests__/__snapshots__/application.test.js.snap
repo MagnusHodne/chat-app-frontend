@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application renders correctly 1`] = `
+<div>
+  <div
+    class="loading-component"
+  >
+    <div>
+      <span
+        class="fa-solid fa-spinner fa-spin-pulse"
+      />
+      <p>
+        Fetching user data, please wait...
+      </p>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenericPage matches snapshot 1`] = `
+<div>
+  <div
+    class="page"
+  >
+    <header
+      class="header"
+    >
+      <div
+        class="title"
+      >
+        <i
+          class="icon fa-solid fa-gamepad"
+        />
+        <h1>
+          Thischord
+        </h1>
+      </div>
+      <div />
+    </header>
+    <div
+      class="sidebar"
+    />
+    <div
+      class="content"
+    />
+  </div>
+</div>
+`;

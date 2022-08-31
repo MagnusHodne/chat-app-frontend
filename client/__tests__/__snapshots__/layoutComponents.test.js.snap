@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `undefined`;
+
+exports[` 2`] = `undefined`;
+
+exports[`Header matches snapshot with a user 1`] = `
+<div>
+  <header
+    class="header"
+  >
+    <div
+      class="title"
+    >
+      <i
+        class="icon fa-solid fa-gamepad"
+      />
+      <h1>
+        Thischord
+      </h1>
+    </div>
+    <div>
+      <button
+        class="button danger"
+      >
+        Log out
+      </button>
+    </div>
+  </header>
+</div>
+`;
+
+exports[`Header matches snapshot with no user 1`] = `
+<div>
+  <header
+    class="header"
+  >
+    <div
+      class="title"
+    >
+      <i
+        class="icon fa-solid fa-gamepad"
+      />
+      <h1>
+        Thischord
+      </h1>
+    </div>
+    <div />
+  </header>
+</div>
+`;

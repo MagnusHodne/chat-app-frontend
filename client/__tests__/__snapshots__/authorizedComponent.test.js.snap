@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthorizedComponent returns the content on successful authorization 1`] = `"<div class=\\".test-component\\">Test success component</div>"`;
+
+exports[`AuthorizedComponent uses an authorization function 1`] = `"<div class=\\"loading-component\\"><div><span class=\\"fa-solid fa-spinner fa-spin-pulse\\"></span><p>Redirecting to login...</p></div></div>"`;

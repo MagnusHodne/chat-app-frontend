@@ -37,6 +37,9 @@ function ProfileCard({ userinfo, initBio }) {
         <label>
           <strong>Bio</strong>
           <textarea
+            className={
+              "mx-0 my-1 w-full resize-none overflow-y-auto rounded-md border-none bg-thischord-500 pt-2 pl-2"
+            }
             name="text"
             value={bio}
             rows={10}

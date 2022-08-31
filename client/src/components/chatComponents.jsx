@@ -4,10 +4,21 @@ import { UserContext } from "../userContext";
 
 export function ChatHeader({ name }) {
   return (
-    <div className={"chat-header flex gap-2"}>
+    <div className={"flex flex-row items-center gap-2"}>
       <FAIcon icon={"fa-solid fa-hashtag"} />
       <h3>{name}</h3>
     </div>
+  );
+}
+
+function ChatMessageAction({ icon, onClick }) {
+  return (
+    <button
+      className={"border-none bg-thischord-600 p-1 hover:bg-thischord-500"}
+      onClick={() => onClick()}
+    >
+      <FAIcon icon={icon} />
+    </button>
   );
 }
 
@@ -15,24 +26,26 @@ function ChatMessageActions({ author, handleDelete }) {
   const { user } = useContext(UserContext);
   const userIsAuthor = author.sub === user.sub;
   return (
-    <div className={"message-actions"}>
-      <button
-        className={"message-action"}
+    <div
+      className={
+        "absolute top-[-1em] right-[1em] h-[2em] w-fit flex-row self-end overflow-clip rounded border border-solid border-thischord-800 p-0"
+      }
+    >
+      <ChatMessageAction
+        icon={"fa-solid fa-heart"}
         onClick={() => alert("Not yet implemented")}
-      >
-        <FAIcon icon={"fa-solid fa-heart"} />
-      </button>
+      />
+
       {userIsAuthor && (
         <>
-          <button
-            className={"message-action"}
+          <ChatMessageAction
+            icon={"fa-solid fa-pencil"}
             onClick={() => alert("Not yet implemented")}
-          >
-            <FAIcon icon={"fa-solid fa-pencil"} />
-          </button>
-          <button className={"message-action"} onClick={() => handleDelete()}>
-            <FAIcon icon={"fa-solid fa-trash-can"} className={"has-danger"} />
-          </button>
+          />
+          <ChatMessageAction
+            icon={"fa-solid fa-trash-can text-red-600"}
+            onClick={() => handleDelete()}
+          />
         </>
       )}
     </div>
@@ -59,7 +72,7 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
 
   return (
     <div
-      className={"message-container"}
+      className={"flex-column relative flex hover:bg-thischord-800"}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
@@ -70,14 +83,14 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
         />
       )}
       {displayInfo && (
-        <div className={"message-info"}>
+        <div className={"mt-2 flex gap-2 pb-2"}>
           <strong>{info.user.name}</strong>
-          <small className={"message-time"}>
+          <small className={"text-[#99aab5]"}>
             {`${date} ${hours}:${minutes}`}
           </small>
         </div>
       )}
-      <div className={"message-text"}>{message}</div>
+      <div className={"py-1 px-0"}>{message}</div>
     </div>
   );
 }
@@ -97,9 +110,9 @@ export function ChatComponent({
   }
 
   return (
-    <div className={"chat-window"}>
+    <div className={"grid h-full grid-rows-[1em_1fr_auto]"}>
       <ChatHeader name={chatRoom} />
-      <div className={"scroll"}>
+      <div className={"overflow-y-auto overflow-x-hidden pt-3"}>
         {messages.map(({ message, user, created, _id }, index) => {
           let displayInfo = false;
           if (index === 0) {
@@ -126,8 +139,14 @@ export function ChatComponent({
         })}
       </div>
       <footer>
-        <form onSubmit={handleSubmit}>
+        <form
+          className={"m-0 flex h-full flex-row items-stretch gap-1"}
+          onSubmit={handleSubmit}
+        >
           <input
+            className={
+              "flex-1 rounded border-none bg-thischord-500 px-3 py-0 placeholder:text-thischord-300"
+            }
             autoFocus={true}
             placeholder={`Message #${chatRoom}`}
             value={message}

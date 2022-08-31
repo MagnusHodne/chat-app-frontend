@@ -6,6 +6,11 @@ export function ChatController() {
   router.get("/", async (req, res) => {
     res.json(await Message.find());
   });
+  router.delete("/", async (req, res) => {
+    const msg = req.body;
+    await Message.deleteOne(msg);
+    res.sendStatus(204);
+  });
   return router;
 }
 

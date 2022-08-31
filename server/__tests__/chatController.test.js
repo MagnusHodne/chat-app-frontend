@@ -25,4 +25,18 @@ describe("chat controller", () => {
     await handleChatMessage(JSON.stringify(message));
     expect(await Message.find()).toHaveLength(1);
   });
+
+  it("has a delete endpoint", async () => {
+    const message = {
+      message: "This is the message",
+      user: { sub: "asdf", name: "Test-user" },
+    };
+    await handleChatMessage(JSON.stringify(message));
+    const storedMessage = await Message.findOne();
+    await request(app)
+      .delete("/api/chat")
+      .send({ _id: storedMessage._id })
+      .expect(204);
+    expect(await Message.find()).toHaveLength(0);
+  });
 });

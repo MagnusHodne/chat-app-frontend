@@ -7,12 +7,12 @@ import { NotFoundPage } from "./notFoundPage";
 import { Button } from "../components/basics";
 import { AuthorizedComponent } from "../components/authorizedComponent";
 
-export function FrontPage({ user }) {
-  function ContentRouter({ user }) {
+export function FrontPage() {
+  function ContentRouter() {
     return (
       <Routes>
-        <Route path={"/profile"} element={<ProfilePage user={user} />} />
-        <Route path={"/chat"} element={<ChatPage user={user} />} />
+        <Route path={"/profile"} element={<ProfilePage />} />
+        <Route path={"/chat"} element={<ChatPage />} />
         <Route path={"/*"} element={<NotFoundPage />} />
       </Routes>
     );
@@ -28,12 +28,10 @@ export function FrontPage({ user }) {
   }
   return (
     <AuthorizedComponent
-      user={user}
       successComponent={
         <GenericPage
-          user={user}
-          mainContent={<ContentRouter user={user} />}
-          sidebarContent={<SidebarContent user={user} />}
+          mainContent={<ContentRouter />}
+          sidebarContent={<SidebarContent />}
         ></GenericPage>
       }
     />

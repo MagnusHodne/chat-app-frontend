@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, FAIcon } from "./basics";
+import { UserContext } from "../userContext";
 
 export function ChatHeader({ name }) {
   return (
@@ -10,18 +11,25 @@ export function ChatHeader({ name }) {
   );
 }
 
-function ChatMessageActions({ user, handleDelete }) {
+function ChatMessageActions({ author, handleDelete }) {
+  const { user } = useContext(UserContext);
+  const userIsAuthor = author.sub === user.sub;
   return (
     <div className={"message-actions"}>
-      <button
-        className={"message-action"}
-        onClick={() => alert("Not yet implemented")}
-      >
-        Edit
-      </button>
-      <button className={"message-action"} onClick={() => handleDelete()}>
-        Delete
-      </button>
+      <button className={"message-action"}>React</button>
+      {userIsAuthor && (
+        <>
+          <button
+            className={"message-action"}
+            onClick={() => alert("Not yet implemented")}
+          >
+            Edit
+          </button>
+          <button className={"message-action"} onClick={() => handleDelete()}>
+            Delete
+          </button>
+        </>
+      )}
     </div>
   );
 }
@@ -37,7 +45,10 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
       onMouseLeave={() => setShowActions(false)}
     >
       {showActions && (
-        <ChatMessageActions handleDelete={() => onDeleteMessage(info._id)} />
+        <ChatMessageActions
+          author={info.user}
+          handleDelete={() => onDeleteMessage(info._id)}
+        />
       )}
       {displayInfo && (
         <div className={"message-info"}>

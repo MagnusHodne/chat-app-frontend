@@ -6,8 +6,10 @@ import {
 } from "../components/feedbackComponents";
 import { ChatApiContext } from "../chatApiContext";
 import { ChatComponent } from "../components/chatComponents";
+import { UserContext } from "../userContext";
 
-function ChatConnection({ initialMessages, user }) {
+function ChatConnection({ initialMessages }) {
+  const { user } = useContext(UserContext);
   const [messages, setMessages] = useState(initialMessages);
   const [ws, setWs] = useState({});
 
@@ -55,7 +57,7 @@ function ChatConnection({ initialMessages, user }) {
   );
 }
 
-export function ChatPage({ user }) {
+export function ChatPage() {
   const { fetchChatLog } = useContext(ChatApiContext);
   const { data, loading, error } = useLoading(fetchChatLog);
   if (loading)
@@ -64,5 +66,5 @@ export function ChatPage({ user }) {
     return (
       <ErrorComponent error={"Unable to fetch messages, please try again"} />
     );
-  return <ChatConnection user={user} initialMessages={data} />;
+  return <ChatConnection initialMessages={data} />;
 }

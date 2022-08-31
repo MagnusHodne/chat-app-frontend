@@ -1,5 +1,5 @@
-import { randomString } from "./lib/randomString";
-import { sha256 } from "./lib/sha256";
+import { randomString } from "../src/lib/randomString";
+import { sha256 } from "../src/lib/sha256";
 
 describe("Random string", () => {
   it("should not produce same output on two consecutive calls", () => {

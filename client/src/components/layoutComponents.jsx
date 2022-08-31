@@ -4,7 +4,7 @@ import { ChatApiContext } from "../chatApiContext";
 import { UserContext } from "../userContext";
 
 export function Content({ content }) {
-  return <div className={"content"}>{content}</div>;
+  return <div className={"min-h-0 bg-thischord-600"}>{content}</div>;
 }
 
 function UserActions() {
@@ -16,16 +16,24 @@ function UserActions() {
 
   return (
     <>
-      <Button to={"/login/endsession"} title={"Log out"} className={"danger"} />
+      <Button
+        to={"/login/endsession"}
+        title={"Log out"}
+        className={"hover:bg-red-800"}
+      />
     </>
   );
 }
 export function Header() {
   return (
-    <header className={"header"}>
-      <div className={"title icon-with-text"}>
+    <header
+      className={
+        "col-span-2 flex flex-row items-center justify-between border-b-2 border-solid border-thischord-900 bg-thischord-600 p-4"
+      }
+    >
+      <div className={"flex flex-row items-center gap-3"}>
         <FAIcon icon={"fa-solid fa-gamepad"} />
-        <h1>Thischord</h1>
+        <h1 className={"text-2xl font-black"}>Thischord</h1>
       </div>
       <div>
         <UserActions />
@@ -35,5 +43,5 @@ export function Header() {
 }
 
 export function Sidebar({ content }) {
-  return <div className={"sidebar"}>{content}</div>;
+  return <div className={"bg-thischord-800 p-2"}>{content}</div>;
 }

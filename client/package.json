@@ -5,8 +5,8 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "dev": "parcel watch index.html",
-    "build": "npm install --include=dev && parcel build index.html"
+    "dev": "parcel watch src/index.html",
+    "build": "npm install --include=dev && parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,9 @@
     "jest": "^27.5.1",
     "jest-babel": "^1.0.1",
     "parcel": "^2.7.0",
-    "process": "^0.11.10"
+    "postcss": "^8.4.16",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.1.8"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { FrontPage } from "../pages/frontPage";
+import { FrontPage } from "../src/pages/frontPage";
 import { MemoryRouter } from "react-router-dom";
 import { act } from "react-dom/test-utils";
 

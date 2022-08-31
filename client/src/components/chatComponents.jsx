@@ -4,10 +4,21 @@ import { UserContext } from "../userContext";
 
 export function ChatHeader({ name }) {
   return (
-    <div className={"chat-header icon-with-text"}>
+    <div className={"flex flex-row items-center gap-2 pl-2"}>
       <FAIcon icon={"fa-solid fa-hashtag"} />
-      <h3>{name}</h3>
+      <h3 className={"font-black"}>{name}</h3>
     </div>
+  );
+}
+
+function ChatMessageAction({ icon, onClick, className }) {
+  return (
+    <button
+      className={`border-none px-2 py-1 hover:bg-thischord-500 ${className}`}
+      onClick={() => onClick()}
+    >
+      <FAIcon icon={icon} />
+    </button>
   );
 }
 
@@ -15,24 +26,29 @@ function ChatMessageActions({ author, handleDelete }) {
   const { user } = useContext(UserContext);
   const userIsAuthor = author.sub === user.sub;
   return (
-    <div className={"message-actions"}>
-      <button
-        className={"message-action"}
+    <div
+      className={
+        "absolute right-2 top-0 -translate-y-1/2 flex-row items-center justify-center self-end overflow-clip rounded border border-solid border-thischord-800 bg-thischord-600"
+      }
+    >
+      <ChatMessageAction
+        icon={"fa-solid fa-heart"}
+        className={"hover:text-amber-500"}
         onClick={() => alert("Not yet implemented")}
-      >
-        <FAIcon icon={"fa-solid fa-heart"} />
-      </button>
+      />
+
       {userIsAuthor && (
         <>
-          <button
-            className={"message-action"}
+          <ChatMessageAction
+            icon={"fa-solid fa-pencil"}
+            className={"hover:text-lime-500"}
             onClick={() => alert("Not yet implemented")}
-          >
-            <FAIcon icon={"fa-solid fa-pencil"} />
-          </button>
-          <button className={"message-action"} onClick={() => handleDelete()}>
-            <FAIcon icon={"fa-solid fa-trash-can"} className={"has-danger"} />
-          </button>
+          />
+          <ChatMessageAction
+            icon={"fa-solid fa-trash-can"}
+            onClick={() => handleDelete()}
+            className={"text-red-600 hover:bg-red-600 hover:text-white"}
+          />
         </>
       )}
     </div>
@@ -41,11 +57,19 @@ function ChatMessageActions({ author, handleDelete }) {
 
 function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
   const created = new Date(info.created);
+  const now = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
   let date;
-  if (Date.now() - created.getTime() < 1000 * 3600 * 24) {
-    date = "Today";
-  } else if (Date.now() - created.getTime() < 1000 * 3600 * 48) {
-    date = "Yesterday";
+  if (
+    now.getMonth() === created.getMonth() &&
+    now.getFullYear() === created.getFullYear()
+  ) {
+    if (now.getDate() === created.getDate()) {
+      date = "Today at";
+    }
+  } else if (yesterday.getDate() === created.getDate()) {
+    date = "Yesterday at";
   } else {
     date = created.toDateString();
   }
@@ -59,7 +83,7 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
 
   return (
     <div
-      className={"message-container"}
+      className={"relative flex flex-col hover:bg-thischord-700"}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
@@ -70,14 +94,19 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
         />
       )}
       {displayInfo && (
-        <div className={"message-info"}>
-          <strong>{info.user.name}</strong>
-          <small className={"message-time"}>
-            {`${date} ${hours}:${minutes}`}
-          </small>
+        <div className={"mt-2 flex gap-2 pb-0"}>
+          <div className={"inline-block"}>
+            <span className={"font-extrabold"}>{info.user.name}</span>
+          </div>
+
+          <div className={"inline-block"}>
+            <span className={"text-xs font-light text-[#99aab5]"}>
+              {`${date} ${hours}:${minutes}`}
+            </span>
+          </div>
         </div>
       )}
-      <div className={"message-text"}>{message}</div>
+      <div className={"py-0.5 px-0"}>{message}</div>
     </div>
   );
 }
@@ -97,9 +126,9 @@ export function ChatComponent({
   }
 
   return (
-    <div className={"chat-window"}>
+    <div className={"grid h-full grid-rows-[3em_1fr_auto] pt-2 pr-2 pb-2"}>
       <ChatHeader name={chatRoom} />
-      <div className={"scroll"}>
+      <div className={"scrollbar overflow-y-auto overflow-x-hidden pt-3"}>
         {messages.map(({ message, user, created, _id }, index) => {
           let displayInfo = false;
           if (index === 0) {
@@ -126,8 +155,14 @@ export function ChatComponent({
         })}
       </div>
       <footer>
-        <form onSubmit={handleSubmit}>
+        <form
+          className={"m-0 flex h-full flex-row items-stretch gap-1 pl-2"}
+          onSubmit={handleSubmit}
+        >
           <input
+            className={
+              "flex-1 rounded border-none bg-thischord-500 px-3 py-0 placeholder:text-thischord-300"
+            }
             autoFocus={true}
             placeholder={`Message #${chatRoom}`}
             value={message}
@@ -135,7 +170,7 @@ export function ChatComponent({
               setMessage(e.target.value);
             }}
           />
-          <Button title={"Send"} />
+          <Button title={"Send"} className={"m-0 h-full"} />
         </form>
       </footer>
     </div>

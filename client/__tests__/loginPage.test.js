@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
-import { Login, LoginCallback, Logout } from "../pages/loginPage";
+import { Login, LoginCallback, Logout } from "../src/pages/loginPage";
 import { MemoryRouter } from "react-router-dom";
-import { ChatApiContext } from "../chatApiContext";
+import { ChatApiContext } from "../src/chatApiContext";
 
 const mockedUsedNavigate = jest.fn();
 

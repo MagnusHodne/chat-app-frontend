@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Application } from "../application";
+import { Application } from "../src/application";
 
 describe("Application", () => {
   it("renders correctly", () => {

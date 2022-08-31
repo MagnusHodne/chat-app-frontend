@@ -4,15 +4,17 @@ import { Header } from "./layoutComponents";
 
 export function LoginForm() {
   return (
-    <div className={"page-fullsize"}>
+    <div
+      className={
+        "grid-cols-2- grid h-[95vh] grid-rows-[5em_1fr] gap-0 overflow-clip rounded-md p-1"
+      }
+    >
       <Header />
-      <div className={"content"}>
-        <div className={"login-buttons"}>
+      <div className={"col-span-2 min-h-0 bg-thischord-700"}>
+        <div className={"flex h-full flex-col items-center justify-center"}>
           <h1>Welcome!</h1>
           <p>Please log in</p>
-          <div
-            style={{ display: "flex", flexDirection: "column", width: "15em" }}
-          >
+          <div className={"w flex w-72 flex-col"}>
             <Button
               to={"/login/google"}
               title={"Log in with Google"}

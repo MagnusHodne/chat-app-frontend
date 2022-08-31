@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Button } from "../components/basics";
+import { Button } from "../src/components/basics";
 import { Simulate } from "react-dom/test-utils";
 
 let element;

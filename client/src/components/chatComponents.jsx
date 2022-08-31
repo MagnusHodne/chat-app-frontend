@@ -4,9 +4,9 @@ import { UserContext } from "../userContext";
 
 export function ChatHeader({ name }) {
   return (
-    <div className={"flex flex-row items-center gap-2"}>
+    <div className={"flex flex-row items-center gap-2 pl-2"}>
       <FAIcon icon={"fa-solid fa-hashtag"} />
-      <h3>{name}</h3>
+      <h3 className={"font-black"}>{name}</h3>
     </div>
   );
 }
@@ -14,7 +14,7 @@ export function ChatHeader({ name }) {
 function ChatMessageAction({ icon, onClick }) {
   return (
     <button
-      className={"border-none bg-thischord-600 p-1 hover:bg-thischord-500"}
+      className={"border-none px-2 py-1 hover:bg-thischord-500"}
       onClick={() => onClick()}
     >
       <FAIcon icon={icon} />
@@ -28,7 +28,7 @@ function ChatMessageActions({ author, handleDelete }) {
   return (
     <div
       className={
-        "absolute top-[-1em] right-[1em] h-[2em] w-fit flex-row self-end overflow-clip rounded border border-solid border-thischord-800 p-0"
+        "absolute right-2 top-0 -translate-y-1/2 flex-row items-center justify-center self-end overflow-clip rounded border border-solid border-thischord-800 bg-thischord-600"
       }
     >
       <ChatMessageAction
@@ -72,7 +72,7 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
 
   return (
     <div
-      className={"flex-column relative flex hover:bg-thischord-800"}
+      className={"relative flex flex-col hover:bg-thischord-700"}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
@@ -83,14 +83,19 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
         />
       )}
       {displayInfo && (
-        <div className={"mt-2 flex gap-2 pb-2"}>
-          <strong>{info.user.name}</strong>
-          <small className={"text-[#99aab5]"}>
-            {`${date} ${hours}:${minutes}`}
-          </small>
+        <div className={"mt-2 flex gap-2 pb-0"}>
+          <div className={"inline-block"}>
+            <span className={"font-extrabold"}>{info.user.name}</span>
+          </div>
+
+          <div className={"inline-block"}>
+            <span className={"text-xs font-light text-[#99aab5]"}>
+              {`${date} ${hours}:${minutes}`}
+            </span>
+          </div>
         </div>
       )}
-      <div className={"py-1 px-0"}>{message}</div>
+      <div className={"py-0.5 px-0"}>{message}</div>
     </div>
   );
 }
@@ -110,9 +115,9 @@ export function ChatComponent({
   }
 
   return (
-    <div className={"grid h-full grid-rows-[1em_1fr_auto]"}>
+    <div className={"grid h-full grid-rows-[3em_1fr_auto]"}>
       <ChatHeader name={chatRoom} />
-      <div className={"overflow-y-auto overflow-x-hidden pt-3"}>
+      <div className={"scrollbar overflow-y-auto overflow-x-hidden pt-3"}>
         {messages.map(({ message, user, created, _id }, index) => {
           let displayInfo = false;
           if (index === 0) {
@@ -154,7 +159,7 @@ export function ChatComponent({
               setMessage(e.target.value);
             }}
           />
-          <Button title={"Send"} />
+          <Button title={"Send"} className={"m-0 h-full"} />
         </form>
       </footer>
     </div>

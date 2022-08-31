@@ -5,7 +5,7 @@ export function FAIcon({ icon }) {
   return <i className={`${icon}`}></i>;
 }
 
-export function Button({ title, icon, to, onClick }) {
+export function Button({ title, icon, to, onClick, className }) {
   if (to) {
     const navigate = useNavigate();
     onClick = () => {
@@ -14,7 +14,7 @@ export function Button({ title, icon, to, onClick }) {
   }
   const button = () => (
     <button
-      className={`m-1 flex items-center justify-center gap-2 rounded-md bg-thischord-500 p-2 text-thischord-100 hover:bg-thischord-400`}
+      className={`m-1 flex items-center justify-center gap-2 rounded-md bg-thischord-500 p-2 text-thischord-100 hover:bg-thischord-400 ${className}`}
       onClick={onClick}
     >
       {icon && <i className={`shrink-0 text-thischord-100 ${icon}`} />}

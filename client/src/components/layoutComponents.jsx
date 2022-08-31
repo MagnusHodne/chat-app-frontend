@@ -4,7 +4,7 @@ import { ChatApiContext } from "../chatApiContext";
 import { UserContext } from "../userContext";
 
 export function Content({ content }) {
-  return <div className={"min-h-0 bg-thischord-700"}>{content}</div>;
+  return <div className={"min-h-0 bg-thischord-600"}>{content}</div>;
 }
 
 function UserActions() {
@@ -24,7 +24,7 @@ export function Header() {
   return (
     <header
       className={
-        "col-span-2 flex flex-row items-center justify-between border-b-2 border-solid border-thischord-900 bg-thischord-700 p-4"
+        "col-span-2 flex flex-row items-center justify-between border-b-2 border-solid border-thischord-900 bg-thischord-600 p-4"
       }
     >
       <div className={"flex flex-row items-center gap-3"}>
@@ -39,5 +39,5 @@ export function Header() {
 }
 
 export function Sidebar({ content }) {
-  return <div className={"bg-thischord-800"}>{content}</div>;
+  return <div className={"bg-thischord-800 p-2"}>{content}</div>;
 }

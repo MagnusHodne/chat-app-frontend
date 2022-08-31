@@ -4,6 +4,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    @apply w-2.5;
+  }
+  .scrollbar::-webkit-scrollbar-track {
+    @apply bg-thischord-800;
+    @apply rounded-full;
+    @apply my-2;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-thischord-900;
+    @apply rounded-full;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
+  }
+}
+
 html {
   @apply text-white;
 }

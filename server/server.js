@@ -7,8 +7,7 @@ import mongoose from "mongoose";
 import { LoginController } from "./loginController.js";
 import { fetchJSON } from "./fetchJSON.js";
 import { WebSocketServer } from "ws";
-import { ChatController, handleChatEvent } from "./chatController.js";
-import { Message } from "./model/Message.js";
+import { ChatController, handleWebSocketMessage } from "./chatController.js";
 import { UserController } from "./userController.js";
 
 dotenv.config();
@@ -52,14 +51,7 @@ const wsServer = new WebSocketServer({ noServer: true });
 wsServer.on("connection", (socket) => {
   sockets.push(socket);
 
-  socket.on("message", async (msg) => {
-    //Execute side effects
-    const { message, created, user, _id } = await handleChatEvent(msg);
-    //Broadcast to all listeners
-    for (const recipient of sockets) {
-      recipient.send(JSON.stringify({ message, created, user, _id }));
-    }
-  });
+  socket.on("message", async (msg) => handleWebSocketMessage(msg, sockets));
 });
 
 const server = app.listen(process.env.PORT || 3000, () => {

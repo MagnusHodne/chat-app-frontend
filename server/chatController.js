@@ -14,13 +14,31 @@ export function ChatController() {
   return router;
 }
 
-/**
- * Function for handling chat events (both new chats, as well as message deletion)
- * @param message
- * @returns
- */
-export async function handleChatEvent(message) {
-  const msg = JSON.parse(message);
-  const entry = new Message({ message: msg.message, user: msg.user });
+async function saveMessage({ message, user }) {
+  const entry = new Message({ message, user });
   return entry.save();
+}
+
+async function deleteMessage({ _id }) {
+  console.log(`Deleting id: ${_id}`);
+  await Message.deleteOne({ _id });
+}
+
+export async function handleWebSocketMessage(msg, sockets) {
+  const obj = JSON.parse(msg);
+  if (obj.action === "create") {
+    const { message, user } = obj;
+    const { _id, created } = await saveMessage({ message, user });
+    for (const recipient of sockets) {
+      recipient.send(
+        JSON.stringify({ action: obj.action, message, created, user, _id })
+      );
+    }
+  } else if (obj.action === "delete") {
+    const { _id } = obj;
+    await deleteMessage({ _id });
+    for (const recipient of sockets) {
+      recipient.send(JSON.stringify({ action: obj.action, _id }));
+    }
+  }
 }

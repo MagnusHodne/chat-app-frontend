@@ -21,17 +21,38 @@ function ChatConnection({ initialMessages, user }) {
       console.log("Opened", event);
     };
     ws.onmessage = (event) => {
-      const { user, message, created, _id } = JSON.parse(event.data);
-      setMessages((messages) => [...messages, { message, user, created, _id }]);
+      const res = JSON.parse(event.data);
+      if (res.action === "create") {
+        const { message, user, created, _id } = res;
+        setMessages((oldMessages) => [
+          ...oldMessages,
+          { message, user, created, _id },
+        ]);
+      }
+      if (res.action === "delete") {
+        const { _id } = res;
+        setMessages((oldMessages) =>
+          oldMessages.filter((msg) => msg._id !== _id)
+        );
+      }
     };
     setWs(ws);
   }, []);
 
   function handleNewMessage(message) {
-    ws.send(JSON.stringify({ message, user }));
+    ws.send(JSON.stringify({ action: "create", message, user }));
+  }
+  function handleDeleteMessage(_id) {
+    ws.send(JSON.stringify({ action: "delete", _id }));
   }
 
-  return <ChatComponent messages={messages} onNewMessage={handleNewMessage} />;
+  return (
+    <ChatComponent
+      messages={messages}
+      onNewMessage={handleNewMessage}
+      onDeleteMessage={handleDeleteMessage}
+    />
+  );
 }
 
 export function ChatPage({ user }) {
@@ -61,9 +82,8 @@ function ChatHeader({ name }) {
   );
 }
 
-function ChatMessage({ message, user, created, _id }) {
+function ChatMessage({ message, user, created, _id, handleDelete }) {
   const date = new Date(created);
-  const { deleteMessage } = useContext(ChatApiContext);
 
   return (
     <div
@@ -86,18 +106,12 @@ function ChatMessage({ message, user, created, _id }) {
         >{`${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`}</small>
       </div>
       {message}
-      <button
-        onClick={async () => {
-          await deleteMessage(_id);
-        }}
-      >
-        Delete
-      </button>
+      <button onClick={() => handleDelete(_id)}>Delete</button>
     </div>
   );
 }
 
-export function ChatComponent({ messages, onNewMessage }) {
+export function ChatComponent({ messages, onNewMessage, onDeleteMessage }) {
   const [message, setMessage] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
@@ -108,13 +122,14 @@ export function ChatComponent({ messages, onNewMessage }) {
     <div className={"chatWindow"}>
       <ChatHeader name={"main"} />
       <div className={"scroll"}>
-        {messages.map(({ message, user, created, _id }, index) => (
+        {messages.map(({ message, user, created, _id }) => (
           <ChatMessage
             message={message}
             user={user}
             created={created}
+            key={_id}
             _id={_id}
-            key={`msg-${index}`}
+            handleDelete={onDeleteMessage}
           />
         ))}
       </div>

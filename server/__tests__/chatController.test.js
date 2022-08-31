@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { ChatController, handleChatEvent } from "../chatController.js";
+import { ChatController, saveMessage } from "../chatController.js";
 import request from "supertest";
 import { Message } from "../model/Message.js";
 
@@ -22,7 +22,7 @@ describe("chat controller", () => {
       message: "This is the message",
       user: { sub: "asdf", name: "Test-user" },
     };
-    await handleChatEvent(JSON.stringify(message));
+    await saveMessage(JSON.stringify(message));
     expect(await Message.find()).toHaveLength(1);
   });
 
@@ -31,7 +31,7 @@ describe("chat controller", () => {
       message: "This is the message",
       user: { sub: "asdf", name: "Test-user" },
     };
-    await handleChatEvent(JSON.stringify(message));
+    await saveMessage(JSON.stringify(message));
     const storedMessage = await Message.findOne();
     await request(app)
       .delete("/api/chat")

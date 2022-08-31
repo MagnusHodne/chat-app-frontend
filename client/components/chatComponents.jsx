@@ -28,10 +28,17 @@ function ChatMessageActions({ user, handleDelete }) {
 
 function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
   const date = new Date(info.created);
+  const [showActions, setShowActions] = useState(false);
 
   return (
-    <div className={"message-container"}>
-      <ChatMessageActions handleDelete={() => onDeleteMessage(info._id)} />
+    <div
+      className={"message-container"}
+      onMouseEnter={() => setShowActions(true)}
+      onMouseLeave={() => setShowActions(false)}
+    >
+      {showActions && (
+        <ChatMessageActions handleDelete={() => onDeleteMessage(info._id)} />
+      )}
       {displayInfo && (
         <div className={"message-info"}>
           <strong>{info.user.name}</strong>

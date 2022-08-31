@@ -20,7 +20,6 @@ async function saveMessage({ message, user }) {
 }
 
 async function deleteMessage({ _id }) {
-  console.log(`Deleting id: ${_id}`);
   await Message.deleteOne({ _id });
 }
 

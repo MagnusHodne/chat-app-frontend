@@ -50,7 +50,6 @@ const sockets = [];
 const wsServer = new WebSocketServer({ noServer: true });
 wsServer.on("connection", (socket) => {
   sockets.push(socket);
-
   socket.on("message", async (msg) => handleWebSocketMessage(msg, sockets));
 });
 

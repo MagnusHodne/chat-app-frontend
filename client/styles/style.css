@@ -1,184 +1,167 @@
 @import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import "chat.css";
 
-:root{
-    --dark: #36393f;
-    --sidebar: #2c2f33;
-    --medium: #43474b;
-    --light: #99aab5;
-    --text: #b7c2ce;
-    --white: #f1f1f1;
-    --page-padding: 0.2rem;
-    --internal-padding: 1rem;
-    --success: #38a25d;
-    --danger: #9d3232;
-    --black: #23272a;
-    background-color: var(--black);
+:root {
+	--dark:             #36393f;
+	--sidebar:          #2c2f33;
+	--medium:           #43474b;
+	--light:            #99aab5;
+	--text:             #b7c2ce;
+	--white:            #f1f1f1;
+	--page-padding:     0.2rem;
+	--internal-padding: 1rem;
+	--success:          #38a25d;
+	--danger:           #9d3232;
+	--black:            #23272a;
+	background-color:   var(--black);
 }
 
 /*===== MAIN PAGE LAYOUT ======*/
 
-body{
-    font-family: "Verdana", serif;
-    color: var(--white);
+body {
+	font-family: "Verdana", serif;
+	color:       var(--white);
 }
 
-.page{
-    padding: var(--page-padding);
-    display: grid;
-    height: 95vh;
-    grid-template-areas: "header header"
-    "sidebar content";
-
-    grid-template-columns: 25% 75%;
-    grid-template-rows: 5em 1fr;
-    grid-gap: 0;
-    border-radius: 1rem;
-    overflow: clip;
+.page {
+	padding:               var(--page-padding);
+	display:               grid;
+	height:                95vh;
+	grid-template-areas: "header header" "sidebar content";
+	grid-template-columns: 25% 75%;
+	grid-template-rows: 5em 1fr;
+	grid-gap:              0;
+	border-radius:         1rem;
+	overflow:              clip;
 }
+
 .page > * {
-    padding: var(--internal-padding);
+	padding: var(--internal-padding);
 }
 
-.page-fullsize{
-    padding: var(--page-padding);
-    display: grid;
-    height: 95vh;
-    grid-template-areas: "header"
+.page-fullsize {
+	padding:             var(--page-padding);
+	display:             grid;
+	height:              95vh;
+	grid-template-areas: "header"
     "content";
 
-    grid-template-rows: 5em 1fr;
-    grid-gap: 0;
-    border-radius: 1rem;
-    overflow: clip;
-}
-.page-fullsize > * {
-    padding: var(--internal-padding);
+	grid-template-rows: 5em 1fr;
+	grid-gap:            0;
+	border-radius:       1rem;
+	overflow:            clip;
 }
 
-.header{
-    display: flex;
-    flex-direction: row;
-    font-family: "Arial Black", serif;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--dark);
-    border-bottom: 2px solid var(--black);
-    grid-area: header;
+.page-fullsize > * {
+	padding: var(--internal-padding);
 }
-.content{
-    background-color: var(--dark);
-    grid-area: content;
-    min-height: 0;
+
+.header {
+	display:          flex;
+	flex-direction:   row;
+	font-family:      "Arial Black", serif;
+	align-items:      center;
+	justify-content:  space-between;
+	background-color: var(--dark);
+	border-bottom:    2px solid var(--black);
+	grid-area:        header;
 }
-.sidebar{
-    background-color: var(--sidebar);
-    grid-area: sidebar;
+
+.content {
+	background-color: var(--dark);
+	grid-area:        content;
+	min-height:       0;
+}
+
+.sidebar {
+	background-color: var(--sidebar);
+	grid-area:        sidebar;
 }
 
 /*===== GENERIC COMPONENTS ======*/
 
-.icon{
-    padding: 0 0.8em 0 0;
+.icon {
+	padding: 0 0.8em 0 0;
 }
 
 .loading-component {
-    height: 100%;
-}
-.loading-component div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	height: 100%;
 }
 
-.profile-picture{
-    border-radius: 100%;
-    border: 0.2em solid var(--light)
+.loading-component div {
+	display:         flex;
+	justify-content: center;
+	align-items:     center;
 }
 
-.title{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+.profile-picture {
+	border-radius: 100%;
+	border:        0.2em solid var(--light)
 }
 
-.scroll{
-    overflow-x: hidden;
-    overflow-y: auto;
+.title {
+	display:        flex;
+	align-items:    center;
+	flex-direction: row;
 }
 
-.chatWindow{
-    display: grid;
-    height: 100%;
-    grid-template-rows: auto 1fr auto;
-}
-
-.chatWindow footer form{
-    display: flex;
-    align-items: stretch;
-    flex-direction: row;
-}
-
-.chatWindow footer form input {
-    flex: 1;
-    border: none;
-    border-radius: 0.3em;
-    background-color: var(--medium);
-    color: var(--white);
-    padding: 0 1em;
+.scroll {
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .login-window {
-    display: grid;
-    height: 100%;
-    grid-template-rows: 1fr;
+	display:            grid;
+	height:             100%;
+	grid-template-rows: 1fr;
 }
 
 .login-buttons {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+	display:         flex;
+	flex-direction:  column;
+	height:          100%;
+	justify-content: center;
+	align-items:     center;
 
 }
 
-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #43474b;
-    color: var(--light);
-    padding: 1em;
-    margin: 0.3em;
-    border: none;
-    border-radius: 0.3em;
-}
-button:hover{
-    background-color: #565c61;
+button {
+	display:          flex;
+	justify-content:  center;
+	align-items:      center;
+	background-color: #43474b;
+	color:            var(--light);
+	padding:          1em;
+	margin:           0.3em;
+	border:           none;
+	border-radius:    0.3em;
 }
 
-button a{
-    color: green;
+button:hover {
+	background-color: #565c61;
+}
+
+button a {
+	color: green;
 }
 
 form textarea {
-    font-family: inherit;
-    width: calc(100% - 1rem); /*Hack to get proper padding*/
-    margin: 1rem 0;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    border: none;
-    background-color: var(--medium);
-    color: var(--white);
-    border-radius: 0.3em;
-    resize: none;
-    overflow-y: auto;
-
+	font-family:      inherit;
+	width:            calc(100% - 1rem); /*Hack to get proper padding*/
+	margin:           1rem 0;
+	padding-top:      1rem;
+	padding-left:     1rem;
+	border:           none;
+	background-color: var(--medium);
+	color:            var(--white);
+	border-radius:    0.3em;
+	resize:           none;
+	overflow-y:       auto;
 }
 
 /*===== COLOURS ======*/
 
-.danger{
-    background-color: var(--danger);
+.danger {
+	background-color: var(--danger);
 }
 

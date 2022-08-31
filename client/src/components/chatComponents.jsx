@@ -57,11 +57,19 @@ function ChatMessageActions({ author, handleDelete }) {
 
 function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
   const created = new Date(info.created);
+  const now = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
   let date;
-  if (Date.now() - created.getTime() < 1000 * 3600 * 24) {
-    date = "Today";
-  } else if (Date.now() - created.getTime() < 1000 * 3600 * 48) {
-    date = "Yesterday";
+  if (
+    now.getMonth() === created.getMonth() &&
+    now.getFullYear() === created.getFullYear()
+  ) {
+    if (now.getDate() === created.getDate()) {
+      date = "Today at";
+    }
+  } else if (yesterday.getDate() === created.getDate()) {
+    date = "Yesterday at";
   } else {
     date = created.toDateString();
   }
@@ -118,7 +126,7 @@ export function ChatComponent({
   }
 
   return (
-    <div className={"grid h-full grid-rows-[3em_1fr_auto]"}>
+    <div className={"grid h-full grid-rows-[3em_1fr_auto] pt-2 pr-2 pb-2"}>
       <ChatHeader name={chatRoom} />
       <div className={"scrollbar overflow-y-auto overflow-x-hidden pt-3"}>
         {messages.map(({ message, user, created, _id }, index) => {
@@ -148,7 +156,7 @@ export function ChatComponent({
       </div>
       <footer>
         <form
-          className={"m-0 flex h-full flex-row items-stretch gap-1"}
+          className={"m-0 flex h-full flex-row items-stretch gap-1 pl-2"}
           onSubmit={handleSubmit}
         >
           <input

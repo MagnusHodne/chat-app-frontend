@@ -14,7 +14,12 @@ export function ChatController() {
   return router;
 }
 
-export async function handleChatMessage(message) {
+/**
+ * Function for handling chat events (both new chats, as well as message deletion)
+ * @param message
+ * @returns
+ */
+export async function handleChatEvent(message) {
   const msg = JSON.parse(message);
   const entry = new Message({ message: msg.message, user: msg.user });
   return entry.save();

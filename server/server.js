@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 import { LoginController } from "./loginController.js";
 import { fetchJSON } from "./fetchJSON.js";
 import { WebSocketServer } from "ws";
-import { ChatController, handleChatMessage } from "./chatController.js";
+import { ChatController, handleChatEvent } from "./chatController.js";
 import { Message } from "./model/Message.js";
 import { UserController } from "./userController.js";
 
@@ -53,7 +53,9 @@ wsServer.on("connection", (socket) => {
   sockets.push(socket);
 
   socket.on("message", async (msg) => {
-    const { message, created, user, _id } = await handleChatMessage(msg);
+    //Execute side effects
+    const { message, created, user, _id } = await handleChatEvent(msg);
+    //Broadcast to all listeners
     for (const recipient of sockets) {
       recipient.send(JSON.stringify({ message, created, user, _id }));
     }

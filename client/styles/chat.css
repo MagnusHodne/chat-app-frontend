@@ -80,6 +80,9 @@
   color: var(--white);
   padding: 0 1em;
 }
+.chat-window footer form input::placeholder {
+  color: var(--text-disabled);
+}
 
 .scroll {
   padding-top: 1em;

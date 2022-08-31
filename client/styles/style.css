@@ -1,5 +1,6 @@
 @import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 @import "chat.css";
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 :root {
   --dark-50: #202225;
@@ -10,6 +11,7 @@
   --dark-500: #565c61;
   --light: #99aab5;
   --text: #b7c2ce;
+  --text-disabled: #72767d;
   --white: #f1f1f1;
   --page-padding: 0.2rem;
   --internal-padding: 1rem;
@@ -20,8 +22,8 @@
 
 /*===== MAIN PAGE LAYOUT ======*/
 
-body {
-  font-family: "Verdana", serif;
+* {
+  font-family: "Nunito", sans-serif;
   color: var(--white);
 }
 

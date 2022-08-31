@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ProfilePage } from "../pages/profilePage";
+import { ProfilePage } from "../src/pages/profilePage";
 
 describe("Profile page", () => {
   it("should match snapshot", () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Content, Header, Sidebar } from "../components/layoutComponents";
+import { Content, Header, Sidebar } from "../src/components/layoutComponents";
 import { BrowserRouter } from "react-router-dom";
 
 let element;

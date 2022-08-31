@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { AuthorizedComponent } from "../components/authorizedComponent";
+import { AuthorizedComponent } from "../src/components/authorizedComponent";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import { act } from "react-dom/test-utils";
-import { ChatApiContext } from "../chatApiContext";
+import { ChatApiContext } from "../src/chatApiContext";
 
 let element;
 beforeEach(() => {

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { NotFoundPage } from "../pages/notFoundPage";
+import { NotFoundPage } from "../src/pages/notFoundPage";
 
 describe("NotFoundPage", () => {
   it("matches snapshot", () => {

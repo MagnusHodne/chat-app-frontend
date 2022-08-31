@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { GenericPage } from "../pages/genericPage";
+import { GenericPage } from "../src/pages/genericPage";
 import { MemoryRouter } from "react-router-dom";
 
 describe("GenericPage", () => {

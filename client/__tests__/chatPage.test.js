@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ChatComponent, ChatPage } from "../pages/chatPage";
+import { ChatPage } from "../pages/chatPage";
 import { act, Simulate } from "react-dom/test-utils";
 import { ChatApiContext } from "../chatApiContext";
+import { ChatComponent } from "../components/chatComponents";
 
 describe("Chat form", () => {
   const messages = [

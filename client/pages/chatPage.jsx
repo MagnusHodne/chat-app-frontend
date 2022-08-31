@@ -4,10 +4,12 @@ import {
   ErrorComponent,
   LoadingComponent,
 } from "../components/feedbackComponents";
-import { FAIcon } from "../components/basics";
 import { ChatApiContext } from "../chatApiContext";
+import { ChatComponent } from "../components/chatComponents";
+import { UserContext } from "../userContext";
 
-function ChatConnection({ initialMessages, user }) {
+function ChatConnection({ initialMessages }) {
+  const { user } = useContext(UserContext);
   const [messages, setMessages] = useState(initialMessages);
   const [ws, setWs] = useState({});
 
@@ -21,20 +23,41 @@ function ChatConnection({ initialMessages, user }) {
       console.log("Opened", event);
     };
     ws.onmessage = (event) => {
-      const { user, message, created } = JSON.parse(event.data);
-      setMessages((messages) => [...messages, { message, user, created }]);
+      const res = JSON.parse(event.data);
+      if (res.action === "create") {
+        const { message, user, created, _id } = res;
+        setMessages((oldMessages) => [
+          ...oldMessages,
+          { message, user, created, _id },
+        ]);
+      }
+      if (res.action === "delete") {
+        const { _id } = res;
+        setMessages((oldMessages) =>
+          oldMessages.filter((msg) => msg._id !== _id)
+        );
+      }
     };
     setWs(ws);
   }, []);
 
   function handleNewMessage(message) {
-    ws.send(JSON.stringify({ message, user }));
+    ws.send(JSON.stringify({ action: "create", message, user }));
+  }
+  function handleDeleteMessage(_id) {
+    ws.send(JSON.stringify({ action: "delete", _id }));
   }
 
-  return <ChatComponent messages={messages} onNewMessage={handleNewMessage} />;
+  return (
+    <ChatComponent
+      messages={messages}
+      onNewMessage={handleNewMessage}
+      onDeleteMessage={handleDeleteMessage}
+    />
+  );
 }
 
-export function ChatPage({ user }) {
+export function ChatPage() {
   const { fetchChatLog } = useContext(ChatApiContext);
   const { data, loading, error } = useLoading(fetchChatLog);
   if (loading)
@@ -43,77 +66,5 @@ export function ChatPage({ user }) {
     return (
       <ErrorComponent error={"Unable to fetch messages, please try again"} />
     );
-  return <ChatConnection user={user} initialMessages={data} />;
-}
-
-function ChatHeader({ name }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-      }}
-    >
-      <FAIcon icon={"fa-solid fa-hashtag"} />
-      <h3>{name}</h3>
-    </div>
-  );
-}
-
-export function ChatComponent({ messages, onNewMessage }) {
-  const [message, setMessage] = useState("");
-  function handleSubmit(e) {
-    e.preventDefault();
-    onNewMessage(message);
-    setMessage("");
-  }
-  return (
-    <div className={"chatWindow"}>
-      <ChatHeader name={"main"} />
-      <div className={"scroll"}>
-        {messages.map(({ message, user, created }, index) => {
-          const date = new Date(created);
-
-          return (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginBottom: "0.8em",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  gridGap: "1em",
-                  paddingBottom: "0.2em",
-                }}
-              >
-                <strong>{user.name}</strong>
-                <small
-                  style={{ fontSize: "0.8em", color: "var(--light)" }}
-                >{`${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`}</small>
-              </div>
-              {message}
-            </div>
-          );
-        })}
-      </div>
-      <footer>
-        <form onSubmit={handleSubmit}>
-          <input
-            autoFocus={true}
-            placeholder={"Say something!"}
-            value={message}
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-          />
-          <button>Send</button>
-        </form>
-      </footer>
-    </div>
-  );
+  return <ChatConnection initialMessages={data} />;
 }

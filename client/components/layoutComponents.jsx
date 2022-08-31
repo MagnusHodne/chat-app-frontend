@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { Button, FAIcon } from "./basics";
 import { ChatApiContext } from "../chatApiContext";
+import { UserContext } from "../userContext";
 
 export function Content({ content }) {
   return <div className={"content"}>{content}</div>;
 }
 
-function UserActions({ user }) {
+function UserActions() {
+  const { user } = useContext(UserContext);
   const { verifyUser } = useContext(ChatApiContext);
   if (!verifyUser(user)) {
     return <></>;
@@ -18,15 +20,15 @@ function UserActions({ user }) {
     </>
   );
 }
-export function Header({ user }) {
+export function Header() {
   return (
     <header className={"header"}>
-      <div className={"title"}>
+      <div className={"title icon-with-text"}>
         <FAIcon icon={"fa-solid fa-gamepad"} />
         <h1>Thischord</h1>
       </div>
       <div>
-        <UserActions user={user} />
+        <UserActions />
       </div>
     </header>
   );

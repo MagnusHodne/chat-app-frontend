@@ -6,9 +6,11 @@ import {
   ErrorComponent,
   LoadingComponent,
 } from "../components/feedbackComponents";
+import { UserContext } from "../userContext";
 
-export function ProfilePage({ user }) {
+export function ProfilePage() {
   const { fetchUserInfo } = useContext(ChatApiContext);
+  const { user } = useContext(UserContext);
   const { data, loading, error } = useLoading(() =>
     fetchUserInfo({ sub: user.sub })
   );
@@ -42,7 +44,7 @@ function ProfileCard({ userinfo, initBio }) {
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
         </label>
-        <button>Update bio</button>
+        <Button title={"Update bio"} />
       </form>
     </div>
   );

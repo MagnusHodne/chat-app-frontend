@@ -20,8 +20,8 @@
     "postinstall": "npm run install:client && npm run install:server",
     "install:client": "cd client && npm install --include=dev",
     "install:server": "cd server && npm install",
-    "format": "prettier --write **/*.{js,jsx,ts,tsx}",
-    "format:check": "prettier --check **/*.{js,jsx,ts,tsx}",
+    "format": "prettier --write **/*.{js,jsx,ts,tsx,css}",
+    "format:check": "prettier --check **/*.{js,jsx,ts,tsx,css}",
     "prepare": "husky install"
   },
   "repository": {

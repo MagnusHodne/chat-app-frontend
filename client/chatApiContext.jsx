@@ -1,5 +1,10 @@
 import React from "react";
-import { fetchJSON, postJSONNoReturn, putJSON } from "./lib/fetchUtils";
+import {
+  deleteJSON,
+  fetchJSON,
+  postJSONNoReturn,
+  putJSON,
+} from "./lib/fetchUtils";
 import { randomString } from "./lib/randomString";
 import { sha256 } from "./lib/sha256";
 
@@ -90,5 +95,8 @@ export const ChatApiContext = React.createContext({
   },
   async updateUserBio({ sub, bio }) {
     return await putJSON("/api/user", { sub, bio });
+  },
+  async deleteMessage({ _id }) {
+    return await deleteJSON("/api/chat", { _id });
   },
 });

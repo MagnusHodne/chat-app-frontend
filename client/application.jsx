@@ -9,6 +9,7 @@ import { useLoading } from "./lib/useLoading";
 import { LoginPage } from "./pages/loginPage";
 import { LoginForm } from "./components/loginForm";
 import { ChatApiContext } from "./chatApiContext";
+import { UserContext } from "./userContext";
 
 export function Application() {
   const { fetchLogin } = useContext(ChatApiContext);
@@ -23,15 +24,17 @@ export function Application() {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={"/startlogin"} element={<LoginForm />} />
-        <Route path={"/*"} element={<FrontPage user={data?.user} />} />
-        <Route
-          path={"/login/*"}
-          element={<LoginPage config={data?.config} reload={reload} />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <UserContext.Provider value={{ user: data?.user }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path={"/startlogin"} element={<LoginForm />} />
+          <Route path={"/*"} element={<FrontPage />} />
+          <Route
+            path={"/login/*"}
+            element={<LoginPage config={data?.config} reload={reload} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }

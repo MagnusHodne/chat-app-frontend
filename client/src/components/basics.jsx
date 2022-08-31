@@ -14,7 +14,7 @@ export function Button({ title, icon, to, onClick }) {
   }
   const button = () => (
     <button
-      className={`p-2 m-1 rounded-md gap-2 text-thischord-100 bg-thischord-500 flex items-center justify-center hover:bg-thischord-400`}
+      className={`m-1 flex items-center justify-center gap-2 rounded-md bg-thischord-500 p-2 text-thischord-100 hover:bg-thischord-400`}
       onClick={onClick}
     >
       {icon && <i className={`shrink-0 text-thischord-100 ${icon}`} />}

@@ -22,7 +22,11 @@ function UserActions() {
 }
 export function Header() {
   return (
-    <header className={"header"}>
+    <header
+      className={
+        "flex flex-row items-center justify-between border-b-2 border-solid border-thischord-900 bg-thischord-700 p-4"
+      }
+    >
       <div className={"title icon-with-text"}>
         <FAIcon icon={"fa-solid fa-gamepad"} />
         <h1>Thischord</h1>

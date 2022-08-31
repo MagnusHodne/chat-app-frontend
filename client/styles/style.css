@@ -125,7 +125,7 @@ body {
   align-items: center;
 }
 
-button {
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,11 +137,11 @@ button {
   border-radius: 0.3em;
 }
 
-button:hover {
+.button:hover {
   background-color: #565c61;
 }
 
-button a {
+.button a {
   color: green;
 }
 

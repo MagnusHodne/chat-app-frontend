@@ -42,7 +42,7 @@ function ProfileCard({ userinfo, initBio }) {
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
         </label>
-        <button>Update bio</button>
+        <Button title={"Update bio"} />
       </form>
     </div>
   );

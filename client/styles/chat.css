@@ -6,12 +6,13 @@
 
 .message-container {
   display: flex;
+  position: relative;
   flex-direction: column;
   margin-bottom: 0.8em;
 }
 
 .message-container:hover {
-  background-color: var(--sidebar);
+  background-color: var(--dark-200);
 }
 
 .message-info {
@@ -27,26 +28,29 @@
 
 .message-actions {
   padding: 0;
-  position: relative;
-  top: 0;
-  display: flex;
+  position: absolute;
+  top: -1em;
+  align-self: end;
+  display: none;
   width: fit-content;
+  height: 2em;
   flex-direction: row;
   border-radius: 0.3em;
+  border: 0.1em solid var(--dark-100);
   overflow: clip;
 }
 .message-container:hover .message-actions {
   display: flex;
 }
 .message-action {
-  background-color: var(--medium);
+  background-color: var(--dark-300);
   border: none;
   color: var(--text);
   padding: 0.7em;
 }
 
 .message-action:hover {
-  background-color: var(--hover);
+  background-color: var(--dark-400);
 }
 
 .chat-window {
@@ -65,7 +69,13 @@
   flex: 1;
   border: none;
   border-radius: 0.3em;
-  background-color: var(--medium);
+  background-color: var(--dark-400);
   color: var(--white);
   padding: 0 1em;
+}
+
+.scroll {
+  padding-top: 1em;
+  overflow-x: hidden;
+  overflow-y: auto;
 }

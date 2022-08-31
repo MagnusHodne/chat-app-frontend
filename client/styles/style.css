@@ -2,10 +2,12 @@
 @import "chat.css";
 
 :root {
-  --dark: #36393f;
-  --sidebar: #2c2f33;
-  --medium: #43474b;
-  --hover: #565c61;
+  --dark-50: #202225;
+  --dark-100: #2f3136;
+  --dark-200: #32353b;
+  --dark-300: #36393f;
+  --dark-400: #40444b;
+  --dark-500: #565c61;
   --light: #99aab5;
   --text: #b7c2ce;
   --white: #f1f1f1;
@@ -13,8 +15,7 @@
   --internal-padding: 1rem;
   --success: #38a25d;
   --danger: #9d3232;
-  --black: #23272a;
-  background-color: var(--black);
+  background-color: var(--dark-50);
 }
 
 /*===== MAIN PAGE LAYOUT ======*/
@@ -64,19 +65,19 @@ body {
   font-family: "Arial Black", serif;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--dark);
-  border-bottom: 2px solid var(--black);
+  background-color: var(--dark-300);
+  border-bottom: 2px solid var(--dark-50);
   grid-area: header;
 }
 
 .content {
-  background-color: var(--dark);
+  background-color: var(--dark-300);
   grid-area: content;
   min-height: 0;
 }
 
 .sidebar {
-  background-color: var(--sidebar);
+  background-color: var(--dark-100);
   grid-area: sidebar;
 }
 
@@ -107,11 +108,6 @@ body {
   flex-direction: row;
 }
 
-.scroll {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
 .login-window {
   display: grid;
   height: 100%;
@@ -130,7 +126,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--medium);
+  background-color: var(--dark-400);
   color: var(--light);
   padding: 1em;
   margin: 0.3em;
@@ -139,7 +135,7 @@ body {
 }
 
 .button:hover {
-  background-color: var(--hover);
+  background-color: var(--dark-500);
 }
 
 .button a {
@@ -153,7 +149,7 @@ form textarea {
   padding-top: 1rem;
   padding-left: 1rem;
   border: none;
-  background-color: var(--medium);
+  background-color: var(--dark-400);
   color: var(--white);
   border-radius: 0.3em;
   resize: none;

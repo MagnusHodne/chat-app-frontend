@@ -84,7 +84,7 @@ body {
 /*===== GENERIC COMPONENTS ======*/
 
 .icon {
-  padding: 0 0.8em 0 0;
+  padding: 0 0 0 0;
 }
 
 .loading-component {
@@ -125,6 +125,7 @@ body {
 .button {
   display: flex;
   justify-content: center;
+  column-gap: 0.5em;
   align-items: center;
   background-color: var(--dark-400);
   color: var(--light);
@@ -140,6 +141,11 @@ body {
 
 .button a {
   color: green;
+}
+
+.icon-with-text {
+  display: flex;
+  column-gap: 0.5em;
 }
 
 form textarea {
@@ -160,4 +166,8 @@ form textarea {
 
 .danger {
   background-color: var(--danger);
+}
+
+.has-danger {
+  color: var(--danger);
 }

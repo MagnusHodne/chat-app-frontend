@@ -30,6 +30,7 @@
   padding: 0;
   position: absolute;
   top: -1em;
+  right: 1em;
   align-self: end;
   width: fit-content;
   height: 2em;

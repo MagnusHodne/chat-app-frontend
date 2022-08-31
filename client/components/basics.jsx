@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export function FAIcon({ icon }) {
-  return <i className={`icon ${icon}`}></i>;
+export function FAIcon({ icon, className }) {
+  return <i className={`icon ${icon} ${className}`}></i>;
 }
 
 export function Button({ title, icon, to, onClick, className }) {

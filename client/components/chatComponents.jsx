@@ -4,7 +4,7 @@ import { UserContext } from "../userContext";
 
 export function ChatHeader({ name }) {
   return (
-    <div className={"chat-header"}>
+    <div className={"chat-header icon-with-text"}>
       <FAIcon icon={"fa-solid fa-hashtag"} />
       <h3>{name}</h3>
     </div>
@@ -16,17 +16,22 @@ function ChatMessageActions({ author, handleDelete }) {
   const userIsAuthor = author.sub === user.sub;
   return (
     <div className={"message-actions"}>
-      <button className={"message-action"}>React</button>
+      <button
+        className={"message-action"}
+        onClick={() => alert("Not yet implemented")}
+      >
+        <FAIcon icon={"fa-solid fa-heart"} />
+      </button>
       {userIsAuthor && (
         <>
           <button
             className={"message-action"}
             onClick={() => alert("Not yet implemented")}
           >
-            Edit
+            <FAIcon icon={"fa-solid fa-pencil"} />
           </button>
           <button className={"message-action"} onClick={() => handleDelete()}>
-            Delete
+            <FAIcon icon={"fa-solid fa-trash-can"} className={"has-danger"} />
           </button>
         </>
       )}

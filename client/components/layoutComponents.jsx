@@ -23,7 +23,7 @@ function UserActions() {
 export function Header() {
   return (
     <header className={"header"}>
-      <div className={"title"}>
+      <div className={"title icon-with-text"}>
         <FAIcon icon={"fa-solid fa-gamepad"} />
         <h1>Thischord</h1>
       </div>

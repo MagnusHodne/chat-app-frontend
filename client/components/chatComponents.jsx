@@ -31,6 +31,15 @@ function ChatMessage({ message, user, created, _id, handleDelete }) {
   );
 }
 
+/**
+ *
+ * @param messages List of messages
+ * @param onNewMessage Function for handling saves
+ * @param onDeleteMessage Function for handling deletes
+ * @param chatRoom Name of the chat room
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function ChatComponent({
   messages,
   onNewMessage,

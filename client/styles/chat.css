@@ -10,6 +10,10 @@
   margin-bottom: 0.8em;
 }
 
+.message-container:hover {
+  background-color: var(--sidebar);
+}
+
 .message-info {
   display: flex;
   grid-gap: 1em;
@@ -31,18 +35,18 @@
   border-radius: 0.3em;
   overflow: clip;
 }
+.message-container:hover .message-actions {
+  display: flex;
+}
 .message-action {
   background-color: var(--medium);
   border: none;
   color: var(--text);
   padding: 0.7em;
 }
+
 .message-action:hover {
   background-color: var(--hover);
-}
-
-.message-container:hover .message-actions {
-  display: flex;
 }
 
 .chat-window {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FAIcon } from "./basics";
+import { Button, FAIcon } from "./basics";
 
 export function ChatHeader({ name }) {
   return (
@@ -107,7 +107,7 @@ export function ChatComponent({
               setMessage(e.target.value);
             }}
           />
-          <button>Send</button>
+          <Button title={"Send"} />
         </form>
       </footer>
     </div>

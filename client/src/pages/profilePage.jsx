@@ -31,7 +31,6 @@ function ProfileCard({ userinfo, initBio }) {
     await updateUserBio({ bio, sub: userinfo.sub });
   }
 
-  console.log(`Picture: ${userinfo.picture}`);
   return (
     <PaddedContent
       content={

@@ -78,6 +78,8 @@ export function LoginController({ fetchFunc }) {
         fetchFunc,
       });
     }
+
+    //Register new user
     if (!(await User.exists({ sub: user.sub }))) {
       await new User({
         sub: user.sub,
@@ -98,26 +100,32 @@ export function LoginController({ fetchFunc }) {
     };
 
     const response = { config, user: {} };
+    let foundsub = "";
 
     //Attempt to get the tokens from the signed cookies
     const { google_access_token, azure_access_token } = req.signedCookies;
 
     //If we have a Google token, fetch the data from Google and add it to the user object
     if (google_access_token) {
-      response.user = await fetchUser({
+      const { sub } = await fetchUser({
         access_token: google_access_token,
         config: config.google,
         fetchFunc,
       });
+      foundsub = sub;
     }
 
     //If we have an Azure token, fetch the data from Google and add it to the user object
     if (azure_access_token) {
-      response.user = await fetchUser({
+      const { sub } = await fetchUser({
         access_token: azure_access_token,
         config: config.azure,
         fetchFunc,
       });
+      foundsub = sub;
+    }
+    if (google_access_token || azure_access_token) {
+      response.user = await User.findOne({ sub: foundsub });
     }
     res.json(response);
   });

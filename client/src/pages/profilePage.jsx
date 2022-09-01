@@ -60,13 +60,3 @@ function ProfileCard({ userinfo, initBio }) {
     />
   );
 }
-
-function ProfilePicture({ url }) {
-  return (
-    <img
-      className={"rounded-full border-2 border-solid border-thischord-100"}
-      src={url}
-      alt={"profile picture"}
-    />
-  );
-}

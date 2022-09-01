@@ -4,9 +4,11 @@ import { UserContext } from "../userContext";
 import { Avatar } from "./avatar";
 import { PaddedContent } from "./layoutComponents";
 
+const paddingLeft = "pl-4";
+
 export function ChatHeader({ name }) {
   return (
-    <div className={"flex flex-row items-center gap-2 pl-2"}>
+    <div className={`flex flex-row items-center gap-2 ${paddingLeft}`}>
       <FAIcon icon={"fa-solid fa-hashtag"} />
       <h3 className={"font-black"}>{name}</h3>
     </div>
@@ -85,7 +87,7 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
 
   return (
     <div
-      className={"relative flex flex-row gap-4 pl-2 hover:bg-thischord-700"}
+      className={`relative flex flex-row gap-4 ${paddingLeft} hover:bg-thischord-700`}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
@@ -168,7 +170,7 @@ export function ChatComponent({
           </div>
           <footer>
             <form
-              className={"m-0 flex h-full flex-row items-stretch gap-1 pl-2"}
+              className={`m-0 flex h-full flex-row items-stretch gap-1 ${paddingLeft}`}
               onSubmit={handleSubmit}
             >
               <input

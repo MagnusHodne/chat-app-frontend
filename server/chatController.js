@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { Message } from "./model/Message.js";
+import { User } from "./model/User.js";
 
 export function ChatController() {
   const router = new Router();
   router.get("/", async (req, res) => {
-    res.json(await Message.find());
+    res.json(await Message.find().populate("user"));
   });
   router.delete("/", async (req, res) => {
     const msg = req.body;
@@ -15,7 +16,8 @@ export function ChatController() {
 }
 
 async function saveMessage({ message, user }) {
-  const entry = new Message({ message, user });
+  const storedUser = await User.findOne({ sub: user.sub });
+  const entry = new Message({ message, user: storedUser._id });
   return entry.save();
 }
 
@@ -30,7 +32,13 @@ export async function handleWebSocketMessage(msg, sockets) {
     const { _id, created } = await saveMessage({ message, user });
     for (const recipient of sockets) {
       recipient.send(
-        JSON.stringify({ action: obj.action, message, created, user, _id })
+        JSON.stringify({
+          action: obj.action,
+          message,
+          created,
+          user,
+          _id,
+        })
       );
     }
   } else if (obj.action === "delete") {

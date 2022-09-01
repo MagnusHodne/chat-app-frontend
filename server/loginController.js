@@ -79,7 +79,11 @@ export function LoginController({ fetchFunc }) {
       });
     }
     if (!(await User.exists({ sub: user.sub }))) {
-      await new User({ sub: user.sub, name: user.name }).save();
+      await new User({
+        sub: user.sub,
+        name: user.name,
+        picture: user.picture,
+      }).save();
     }
 
     res.cookie(`${provider}_access_token`, access_token, { signed: true });

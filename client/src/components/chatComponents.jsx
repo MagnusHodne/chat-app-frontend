@@ -55,6 +55,10 @@ function ChatMessageActions({ author, handleDelete }) {
   );
 }
 
+function Avatar({ src }) {
+  return <img className={`rounded-full`} src={src} alt={""} />;
+}
+
 function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
   const created = new Date(info.created);
   const now = new Date();
@@ -83,30 +87,37 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
 
   return (
     <div
-      className={"relative flex flex-col hover:bg-thischord-700"}
+      className={"relative flex flex-row gap-4 pl-2 hover:bg-thischord-700"}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
-      {showActions && (
-        <ChatMessageActions
-          author={info.user}
-          handleDelete={() => onDeleteMessage(info._id)}
-        />
-      )}
-      {displayInfo && (
-        <div className={"mt-2 flex gap-2 pb-0"}>
-          <div className={"inline-block"}>
-            <span className={"font-extrabold"}>{info.user.name}</span>
-          </div>
+      <div className={`mt-2 w-10 p-0 ${displayInfo && "h-10"}`}>
+        {displayInfo && <Avatar src={info.user.picture} />}
+      </div>
+      <div className={"flex flex-col"}>
+        {showActions && (
+          <ChatMessageActions
+            author={info.user}
+            handleDelete={() => onDeleteMessage(info._id)}
+          />
+        )}
+        {displayInfo && (
+          <div className={"mt-2 flex gap-2 pb-0"}>
+            <div className={"inline-block"}>
+              <span className={"font-extrabold hover:underline"}>
+                {info.user.name}
+              </span>
+            </div>
 
-          <div className={"inline-block"}>
-            <span className={"text-xs font-light text-[#99aab5]"}>
-              {`${date} ${hours}:${minutes}`}
-            </span>
+            <div className={"inline-block"}>
+              <span className={"text-xs font-light text-[#99aab5]"}>
+                {`${date} ${hours}:${minutes}`}
+              </span>
+            </div>
           </div>
-        </div>
-      )}
-      <div className={"py-0.5 px-0"}>{message}</div>
+        )}
+        <div className={"py-0.5 px-0"}>{message}</div>
+      </div>
     </div>
   );
 }

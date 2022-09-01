@@ -27,3 +27,7 @@
 html {
   @apply text-white;
 }
+#app {
+  height: 98vh;
+  @apply p-2;
+}

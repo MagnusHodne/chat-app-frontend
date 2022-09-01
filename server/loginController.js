@@ -78,8 +78,14 @@ export function LoginController({ fetchFunc }) {
         fetchFunc,
       });
     }
+
+    //Register new user
     if (!(await User.exists({ sub: user.sub }))) {
-      await new User({ sub: user.sub, name: user.name }).save();
+      await new User({
+        sub: user.sub,
+        name: user.name,
+        picture: user.picture,
+      }).save();
     }
 
     res.cookie(`${provider}_access_token`, access_token, { signed: true });
@@ -114,6 +120,9 @@ export function LoginController({ fetchFunc }) {
         config: config.azure,
         fetchFunc,
       });
+    }
+    if (google_access_token || azure_access_token) {
+      response.user = await User.findOne({ sub: response.user.sub });
     }
     res.json(response);
   });

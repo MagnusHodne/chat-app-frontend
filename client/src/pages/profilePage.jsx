@@ -7,6 +7,8 @@ import {
   LoadingComponent,
 } from "../components/feedbackComponents";
 import { UserContext } from "../userContext";
+import { Avatar } from "../components/avatar";
+import { PaddedContent } from "../components/layoutComponents";
 
 export function ProfilePage() {
   const { fetchUserInfo } = useContext(ChatApiContext);
@@ -17,7 +19,7 @@ export function ProfilePage() {
   if (loading)
     return <LoadingComponent message={"Fetching user bio, please wait..."} />;
   if (error) return <ErrorComponent error={"Unable to fetch user bio"} />;
-  return <ProfileCard userinfo={user} initBio={data.bio} />;
+  return <ProfileCard userinfo={data} initBio={data.bio} />;
 }
 
 function ProfileCard({ userinfo, initBio }) {
@@ -27,37 +29,33 @@ function ProfileCard({ userinfo, initBio }) {
   async function handleSubmit(e) {
     e.preventDefault();
     await updateUserBio({ bio, sub: userinfo.sub });
-    console.log("update bio from here");
   }
-  return (
-    <div>
-      {userinfo.picture && <ProfilePicture url={userinfo.picture} />}
-      <h1 className={"text-2xl"}>{`${userinfo.name}`}</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <strong>Bio</strong>
-          <textarea
-            className={
-              "mx-0 my-1 w-full resize-none overflow-y-auto rounded-md border-none bg-thischord-500 pt-2 pl-2"
-            }
-            name="text"
-            value={bio}
-            rows={10}
-            onChange={(e) => setBio(e.target.value)}
-          ></textarea>
-        </label>
-        <Button title={"Update bio"} />
-      </form>
-    </div>
-  );
-}
 
-function ProfilePicture({ url }) {
   return (
-    <img
-      className={"rounded-full border-2 border-solid border-thischord-100"}
-      src={url}
-      alt={"profile picture"}
+    <PaddedContent
+      content={
+        <>
+          <div className={"h-24 w-24"}>
+            <Avatar src={userinfo.picture} />
+          </div>
+          <h1 className={"text-2xl"}>{`${userinfo.name}`}</h1>
+          <form onSubmit={handleSubmit}>
+            <label>
+              <strong>Bio</strong>
+              <textarea
+                className={
+                  "mx-0 my-1 w-full resize-none overflow-y-auto rounded-md border-none bg-thischord-500 pt-2 pl-2"
+                }
+                name="text"
+                value={bio}
+                rows={10}
+                onChange={(e) => setBio(e.target.value)}
+              ></textarea>
+            </label>
+            <Button title={"Update bio"} />
+          </form>
+        </>
+      }
     />
   );
 }

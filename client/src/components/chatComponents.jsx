@@ -1,10 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Button, FAIcon } from "./basics";
 import { UserContext } from "../userContext";
+import { Avatar } from "./avatar";
+import { PaddedContent } from "./layoutComponents";
+
+const paddingLeft = "pl-4";
 
 export function ChatHeader({ name }) {
   return (
-    <div className={"flex flex-row items-center gap-2 pl-2"}>
+    <div className={`flex flex-row items-center gap-2 ${paddingLeft}`}>
       <FAIcon icon={"fa-solid fa-hashtag"} />
       <h3 className={"font-black"}>{name}</h3>
     </div>
@@ -83,30 +87,37 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
 
   return (
     <div
-      className={"relative flex flex-col hover:bg-thischord-700"}
+      className={`relative flex flex-row gap-4 ${paddingLeft} hover:bg-thischord-700`}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
-      {showActions && (
-        <ChatMessageActions
-          author={info.user}
-          handleDelete={() => onDeleteMessage(info._id)}
-        />
-      )}
-      {displayInfo && (
-        <div className={"mt-2 flex gap-2 pb-0"}>
-          <div className={"inline-block"}>
-            <span className={"font-extrabold"}>{info.user.name}</span>
-          </div>
+      <div className={`mt-2 w-10 p-0 ${displayInfo && "h-10"}`}>
+        {displayInfo && <Avatar src={info.user.picture} />}
+      </div>
+      <div className={"flex flex-col"}>
+        {showActions && (
+          <ChatMessageActions
+            author={info.user}
+            handleDelete={() => onDeleteMessage(info._id)}
+          />
+        )}
+        {displayInfo && (
+          <div className={"mt-2 flex gap-2 pb-0"}>
+            <div className={"inline-block"}>
+              <span className={"font-extrabold hover:underline"}>
+                {info.user.name}
+              </span>
+            </div>
 
-          <div className={"inline-block"}>
-            <span className={"text-xs font-light text-[#99aab5]"}>
-              {`${date} ${hours}:${minutes}`}
-            </span>
+            <div className={"inline-block"}>
+              <span className={"text-xs font-light text-[#99aab5]"}>
+                {`${date} ${hours}:${minutes}`}
+              </span>
+            </div>
           </div>
-        </div>
-      )}
-      <div className={"py-0.5 px-0"}>{message}</div>
+        )}
+        <div className={"py-0.5 px-0"}>{message}</div>
+      </div>
     </div>
   );
 }
@@ -126,53 +137,58 @@ export function ChatComponent({
   }
 
   return (
-    <div className={"grid h-full grid-rows-[3em_1fr_auto] pt-2 pr-2 pb-2"}>
-      <ChatHeader name={chatRoom} />
-      <div className={"scrollbar overflow-y-auto overflow-x-hidden pt-3"}>
-        {messages.map(({ message, user, created, _id }, index) => {
-          let displayInfo = false;
-          if (index === 0) {
-            displayInfo = true;
-          } else if (messages[index - 1].user.sub !== user.sub) {
-            displayInfo = true;
-          } else if (
-            new Date(created).getTime() -
-              new Date(messages[index - 1].created).getTime() >
-            1000 * 3600
-          ) {
-            displayInfo = true;
-          }
+    <PaddedContent
+      className={"grid h-full grid-rows-[3em_1fr_auto] pl-0"}
+      content={
+        <>
+          <ChatHeader name={chatRoom} />
+          <div className={"scrollbar overflow-y-auto overflow-x-hidden pt-3"}>
+            {messages.map(({ message, user, created, _id }, index) => {
+              let displayInfo = false;
+              if (index === 0) {
+                displayInfo = true;
+              } else if (messages[index - 1].user.sub !== user.sub) {
+                displayInfo = true;
+              } else if (
+                new Date(created).getTime() -
+                  new Date(messages[index - 1].created).getTime() >
+                1000 * 3600
+              ) {
+                displayInfo = true;
+              }
 
-          return (
-            <ChatMessage
-              message={message}
-              info={{ user, created, _id }}
-              displayInfo={displayInfo}
-              key={_id}
-              onDeleteMessage={onDeleteMessage}
-            />
-          );
-        })}
-      </div>
-      <footer>
-        <form
-          className={"m-0 flex h-full flex-row items-stretch gap-1 pl-2"}
-          onSubmit={handleSubmit}
-        >
-          <input
-            className={
-              "flex-1 rounded border-none bg-thischord-500 px-3 py-0 placeholder:text-thischord-300"
-            }
-            autoFocus={true}
-            placeholder={`Message #${chatRoom}`}
-            value={message}
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-          />
-          <Button title={"Send"} className={"m-0 h-full"} />
-        </form>
-      </footer>
-    </div>
+              return (
+                <ChatMessage
+                  message={message}
+                  info={{ user, created, _id }}
+                  displayInfo={displayInfo}
+                  key={_id}
+                  onDeleteMessage={onDeleteMessage}
+                />
+              );
+            })}
+          </div>
+          <footer>
+            <form
+              className={`m-0 flex h-full flex-row items-stretch gap-1 ${paddingLeft}`}
+              onSubmit={handleSubmit}
+            >
+              <input
+                className={
+                  "flex-1 rounded border-none bg-thischord-500 px-3 py-0 placeholder:text-thischord-300"
+                }
+                autoFocus={true}
+                placeholder={`Message #${chatRoom}`}
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+              <Button title={"Send"} className={"m-0 h-full"} />
+            </form>
+          </footer>
+        </>
+      }
+    />
   );
 }

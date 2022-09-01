@@ -6,7 +6,7 @@ export function LoginForm() {
   return (
     <div
       className={
-        "grid-cols-2- grid h-[95vh] grid-rows-[5em_1fr] gap-0 overflow-clip rounded-md p-1"
+        "m-1 grid h-full grid-cols-2 grid-rows-[5em_1fr] gap-0 overflow-clip rounded-md"
       }
     >
       <Header />

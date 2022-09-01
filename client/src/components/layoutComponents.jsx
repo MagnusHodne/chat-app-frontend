@@ -6,6 +6,9 @@ import { UserContext } from "../userContext";
 export function Content({ content }) {
   return <div className={"min-h-0 bg-thischord-600"}>{content}</div>;
 }
+export function PaddedContent({ content, className }) {
+  return <div className={`p-4 ${className}`}>{content}</div>;
+}
 
 function UserActions() {
   const { user } = useContext(UserContext);

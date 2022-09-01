@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Button, FAIcon } from "./basics";
 import { UserContext } from "../userContext";
+import { Avatar } from "./avatar";
+import { PaddedContent } from "./layoutComponents";
 
 export function ChatHeader({ name }) {
   return (
@@ -53,10 +55,6 @@ function ChatMessageActions({ author, handleDelete }) {
       )}
     </div>
   );
-}
-
-function Avatar({ src }) {
-  return <img className={`rounded-full`} src={src} alt={""} />;
 }
 
 function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
@@ -137,53 +135,58 @@ export function ChatComponent({
   }
 
   return (
-    <div className={"grid h-full grid-rows-[3em_1fr_auto] pt-2 pr-2 pb-2"}>
-      <ChatHeader name={chatRoom} />
-      <div className={"scrollbar overflow-y-auto overflow-x-hidden pt-3"}>
-        {messages.map(({ message, user, created, _id }, index) => {
-          let displayInfo = false;
-          if (index === 0) {
-            displayInfo = true;
-          } else if (messages[index - 1].user.sub !== user.sub) {
-            displayInfo = true;
-          } else if (
-            new Date(created).getTime() -
-              new Date(messages[index - 1].created).getTime() >
-            1000 * 3600
-          ) {
-            displayInfo = true;
-          }
+    <PaddedContent
+      className={"grid h-full grid-rows-[3em_1fr_auto] pl-0"}
+      content={
+        <>
+          <ChatHeader name={chatRoom} />
+          <div className={"scrollbar overflow-y-auto overflow-x-hidden pt-3"}>
+            {messages.map(({ message, user, created, _id }, index) => {
+              let displayInfo = false;
+              if (index === 0) {
+                displayInfo = true;
+              } else if (messages[index - 1].user.sub !== user.sub) {
+                displayInfo = true;
+              } else if (
+                new Date(created).getTime() -
+                  new Date(messages[index - 1].created).getTime() >
+                1000 * 3600
+              ) {
+                displayInfo = true;
+              }
 
-          return (
-            <ChatMessage
-              message={message}
-              info={{ user, created, _id }}
-              displayInfo={displayInfo}
-              key={_id}
-              onDeleteMessage={onDeleteMessage}
-            />
-          );
-        })}
-      </div>
-      <footer>
-        <form
-          className={"m-0 flex h-full flex-row items-stretch gap-1 pl-2"}
-          onSubmit={handleSubmit}
-        >
-          <input
-            className={
-              "flex-1 rounded border-none bg-thischord-500 px-3 py-0 placeholder:text-thischord-300"
-            }
-            autoFocus={true}
-            placeholder={`Message #${chatRoom}`}
-            value={message}
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-          />
-          <Button title={"Send"} className={"m-0 h-full"} />
-        </form>
-      </footer>
-    </div>
+              return (
+                <ChatMessage
+                  message={message}
+                  info={{ user, created, _id }}
+                  displayInfo={displayInfo}
+                  key={_id}
+                  onDeleteMessage={onDeleteMessage}
+                />
+              );
+            })}
+          </div>
+          <footer>
+            <form
+              className={"m-0 flex h-full flex-row items-stretch gap-1 pl-2"}
+              onSubmit={handleSubmit}
+            >
+              <input
+                className={
+                  "flex-1 rounded border-none bg-thischord-500 px-3 py-0 placeholder:text-thischord-300"
+                }
+                autoFocus={true}
+                placeholder={`Message #${chatRoom}`}
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+              <Button title={"Send"} className={"m-0 h-full"} />
+            </form>
+          </footer>
+        </>
+      }
+    />
   );
 }

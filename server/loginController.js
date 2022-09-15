@@ -92,6 +92,14 @@ export function LoginController({ fetchFunc }) {
     res.sendStatus(200);
   });
 
+  router.get("/config", async (req, res) => {
+    const config = {
+      google: await googleConfig({ fetchFunc }),
+      azure: await azureConfig({ fetchFunc }),
+    };
+    res.json(config);
+  });
+
   //Endpoint for getting user info
   router.get("/", async (req, res) => {
     const config = {
@@ -99,7 +107,7 @@ export function LoginController({ fetchFunc }) {
       azure: await azureConfig({ fetchFunc }),
     };
 
-    const response = { config, user: {} };
+    const response = { user: {} };
 
     //Attempt to get the tokens from the signed cookies
     const { google_access_token, azure_access_token } = req.signedCookies;

@@ -3,61 +3,17 @@
 exports[`Front page matches snapshot for given user 1`] = `
 <div>
   <div
-    class="page"
+    class="loading-component flex h-full items-center justify-center"
   >
-    <header
-      class="header"
-    >
-      <div
-        class="title"
-      >
-        <i
-          class="icon fa-solid fa-gamepad"
-        />
-        <h1>
-          Thischord
-        </h1>
-      </div>
-      <div>
-        <button
-          class="button danger"
-        >
-          Log out
-        </button>
-      </div>
-    </header>
     <div
-      class="sidebar"
+      class="flex flex-row items-center gap-2"
     >
-      <div
-        style="display: flex; flex-direction: column;"
-      >
-        <button
-          class="button "
-        >
-          <i
-            class="icon fa-solid fa-user"
-          />
-          Profile
-        </button>
-        <button
-          class="button "
-        >
-          <i
-            class="icon fa-solid fa-comment"
-          />
-          Chat
-        </button>
-      </div>
-    </div>
-    <div
-      class="content"
-    >
-      <div>
-        <h1>
-          Not found...
-        </h1>
-      </div>
+      <span
+        class="fa-solid fa-spinner fa-spin-pulse"
+      />
+      <p>
+        Redirecting to login...
+      </p>
     </div>
   </div>
 </div>
@@ -66,9 +22,11 @@ exports[`Front page matches snapshot for given user 1`] = `
 exports[`Front page matches snapshot for no user 1`] = `
 <div>
   <div
-    class="loading-component"
+    class="loading-component flex h-full items-center justify-center"
   >
-    <div>
+    <div
+      class="flex flex-row items-center gap-2"
+    >
       <span
         class="fa-solid fa-spinner fa-spin-pulse"
       />

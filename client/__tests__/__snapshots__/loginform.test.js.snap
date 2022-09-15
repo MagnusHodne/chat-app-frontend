@@ -3,28 +3,30 @@
 exports[`LoginForm matches snapshot 1`] = `
 <div>
   <div
-    class="page-fullsize"
+    class="m-1 grid h-full grid-cols-2 grid-rows-[5em_1fr] gap-0 overflow-clip rounded-md"
   >
     <header
-      class="header"
+      class="col-span-2 flex flex-row items-center justify-between border-b-2 border-solid border-thischord-900 bg-thischord-600 p-4"
     >
       <div
-        class="title"
+        class="flex flex-row items-center gap-3"
       >
         <i
-          class="icon fa-solid fa-gamepad"
+          class="fa-solid fa-gamepad"
         />
-        <h1>
+        <h1
+          class="text-2xl font-black"
+        >
           Thischord
         </h1>
       </div>
       <div />
     </header>
     <div
-      class="content"
+      class="col-span-2 min-h-0 bg-thischord-700"
     >
       <div
-        class="login-buttons"
+        class="flex h-full flex-col items-center justify-center"
       >
         <h1>
           Welcome!
@@ -33,21 +35,21 @@ exports[`LoginForm matches snapshot 1`] = `
           Please log in
         </p>
         <div
-          style="display: flex; flex-direction: column; width: 15em;"
+          class="w flex w-72 flex-col"
         >
           <button
-            class="button "
+            class="m-1 flex items-center justify-center gap-2 rounded-md bg-thischord-500 px-3 py-2 text-thischord-100 hover:bg-thischord-400 undefined"
           >
             <i
-              class="icon fa-brands fa-google"
+              class="shrink-0 text-thischord-100 fa-brands fa-google"
             />
             Log in with Google
           </button>
           <button
-            class="button "
+            class="m-1 flex items-center justify-center gap-2 rounded-md bg-thischord-500 px-3 py-2 text-thischord-100 hover:bg-thischord-400 undefined"
           >
             <i
-              class="icon fa-brands fa-microsoft"
+              class="shrink-0 text-thischord-100 fa-brands fa-microsoft"
             />
             Log in with Active Directory
           </button>

@@ -82,7 +82,9 @@ export function LoginCallback({ reload, config }) {
 export function Login() {
   const { handleLogin, fetchConfig } = useContext(ChatApiContext);
   const { error, data, loading } = useLoading(() => fetchConfig());
-  const Wrapper = () => {
+
+  //This react component actually handles the login. Have to nest it in order to fetch config first...
+  const LoginHandler = () => {
     const { provider } = useParams();
     const { error } = useLoading(() => handleLogin(provider, data));
     if (error) {
@@ -98,7 +100,7 @@ export function Login() {
     return <LoadingComponent message={"Fetching config"} />;
   }
 
-  return <Wrapper />;
+  return <LoginHandler />;
 }
 
 export function Logout({ reload }) {

@@ -26,10 +26,7 @@ export function Application() {
         <Routes>
           <Route path={"/startlogin"} element={<LoginForm />} />
           <Route path={"/*"} element={<FrontPage />} />
-          <Route
-            path={"/login/*"}
-            element={<LoginPage config={data?.config} reload={reload} />}
-          />
+          <Route path={"/login/*"} element={<LoginPage reload={reload} />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

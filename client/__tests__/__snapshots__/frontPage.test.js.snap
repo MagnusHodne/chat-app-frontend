@@ -3,7 +3,7 @@
 exports[`Front page matches snapshot for given user 1`] = `
 <div>
   <div
-    class="flex h-full items-center justify-center"
+    class="loading-component flex h-full items-center justify-center"
   >
     <div
       class="flex flex-row items-center gap-2"
@@ -22,7 +22,7 @@ exports[`Front page matches snapshot for given user 1`] = `
 exports[`Front page matches snapshot for no user 1`] = `
 <div>
   <div
-    class="flex h-full items-center justify-center"
+    class="loading-component flex h-full items-center justify-center"
   >
     <div
       class="flex flex-row items-center gap-2"

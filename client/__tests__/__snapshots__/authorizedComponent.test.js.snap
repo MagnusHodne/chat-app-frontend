@@ -2,4 +2,4 @@
 
 exports[`AuthorizedComponent returns the content on successful authorization 1`] = `"<div class=\\".test-component\\">Test success component</div>"`;
 
-exports[`AuthorizedComponent uses an authorization function 1`] = `"<div class=\\"loading-component\\"><div><span class=\\"fa-solid fa-spinner fa-spin-pulse\\"></span><p>Redirecting to login...</p></div></div>"`;
+exports[`AuthorizedComponent uses an authorization function 1`] = `"<div class=\\"flex h-full items-center justify-center\\"><div class=\\"flex flex-row items-center gap-2\\"><span class=\\"fa-solid fa-spinner fa-spin-pulse\\"></span><p>Redirecting to login...</p></div></div>"`;

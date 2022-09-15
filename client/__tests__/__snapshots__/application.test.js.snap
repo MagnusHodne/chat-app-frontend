@@ -3,9 +3,11 @@
 exports[`Application renders correctly 1`] = `
 <div>
   <div
-    class="loading-component"
+    class="flex h-full items-center justify-center"
   >
-    <div>
+    <div
+      class="flex flex-row items-center gap-2"
+    >
       <span
         class="fa-solid fa-spinner fa-spin-pulse"
       />

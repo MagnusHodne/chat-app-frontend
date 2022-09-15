@@ -79,28 +79,15 @@ export function LoginCallback({ reload, config }) {
   return <LoadingComponent message={"Fetching user data, please wait..."} />;
 }
 
-export function Login() {
-  const { handleLogin, fetchConfig } = useContext(ChatApiContext);
-  const { error, data, loading } = useLoading(() => fetchConfig());
-
-  //This react component actually handles the login. Have to nest it in order to fetch config first...
-  const LoginHandler = () => {
-    const { provider } = useParams();
-    const { error } = useLoading(() => handleLogin(provider, data));
-    if (error) {
-      return <ErrorComponent error={error} />;
-    }
-
-    return <LoadingComponent message={"Redirecting to login, please wait"} />;
-  };
+export function Login({ config }) {
+  const { handleLogin } = useContext(ChatApiContext);
+  const { provider } = useParams();
+  const { error } = useLoading(() => handleLogin(provider, config));
   if (error) {
     return <ErrorComponent error={error} />;
   }
-  if (loading) {
-    return <LoadingComponent message={"Fetching config"} />;
-  }
 
-  return <LoginHandler />;
+  return <LoadingComponent message={"Redirecting to login, please wait"} />;
 }
 
 export function Logout({ reload }) {
@@ -114,13 +101,21 @@ export function Logout({ reload }) {
   return <LoadingComponent message={"Logging out, please wait..."} />;
 }
 
-export function LoginPage({ config, reload }) {
+export function LoginPage({ reload }) {
+  const { fetchConfig } = useContext(ChatApiContext);
+  const { data, error, loading } = useLoading(() => fetchConfig());
+  if (error) {
+    return <ErrorComponent error={"Unable to fetch login configuration..."} />;
+  }
+  if (loading) {
+    return <LoadingComponent message={"Fetching login config..."} />;
+  }
   return (
     <Routes>
-      <Route path={"/:provider"} element={<Login />} />
+      <Route path={"/:provider"} element={<Login config={data} />} />
       <Route
         path={"/:provider/callback"}
-        element={<LoginCallback config={config} reload={reload} />}
+        element={<LoginCallback config={data} reload={reload} />}
       />
       <Route path={"/endsession"} element={<Logout reload={reload} />} />
     </Routes>

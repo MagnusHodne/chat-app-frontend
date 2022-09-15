@@ -14,7 +14,6 @@ export function LoadingComponent({ message = "Loading, please wait..." }) {
 export function ErrorComponent({ error }) {
   return (
     <div>
-      <h1>Error</h1>
       <div id={"error-text"}>{error.toString()}</div>
     </div>
   );

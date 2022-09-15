@@ -19,9 +19,6 @@ export function Application() {
   if (loading) {
     return <LoadingComponent message={"Fetching user data, please wait..."} />;
   }
-  if (error) {
-    return <ErrorComponent error={error} />;
-  }
 
   return (
     <UserContext.Provider value={{ user: data?.user }}>

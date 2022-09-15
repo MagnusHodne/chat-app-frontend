@@ -32,7 +32,7 @@ mongoose.connect(
 );
 
 //Init login controller here
-app.use("/api/v1/login", LoginController({ fetchFunc: fetchJSON }));
+app.use("/api/login", LoginController({ fetchFunc: fetchJSON }));
 
 app.use("/api/chat", ChatController());
 app.use("/api/user", UserController());

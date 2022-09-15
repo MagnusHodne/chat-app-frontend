@@ -16,6 +16,9 @@ export const ChatApiContext = React.createContext({
   async fetchLogin() {
     return await fetchJSON("/api/login");
   },
+  async fetchConfig() {
+    return await fetchJSON("/api/login/config");
+  },
   /**
    * Sends the access_token from a provider to the server (so that it can be signed)
    * @param provider the provider that has been used

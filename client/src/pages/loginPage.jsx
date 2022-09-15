@@ -79,15 +79,26 @@ export function LoginCallback({ reload, config }) {
   return <LoadingComponent message={"Fetching user data, please wait..."} />;
 }
 
-export function Login({ config }) {
-  const { provider } = useParams();
-  const { handleLogin } = useContext(ChatApiContext);
-  const { error } = useLoading(() => handleLogin(provider, config));
+export function Login() {
+  const { handleLogin, fetchConfig } = useContext(ChatApiContext);
+  const { error, data, loading } = useLoading(() => fetchConfig());
+  const Wrapper = () => {
+    const { provider } = useParams();
+    const { error } = useLoading(() => handleLogin(provider, data));
+    if (error) {
+      return <ErrorComponent error={error} />;
+    }
+
+    return <LoadingComponent message={"Redirecting to login, please wait"} />;
+  };
   if (error) {
     return <ErrorComponent error={error} />;
   }
+  if (loading) {
+    return <LoadingComponent message={"Fetching config"} />;
+  }
 
-  return <LoadingComponent message={"Redirecting to login, please wait"} />;
+  return <Wrapper />;
 }
 
 export function Logout({ reload }) {
@@ -104,7 +115,7 @@ export function Logout({ reload }) {
 export function LoginPage({ config, reload }) {
   return (
     <Routes>
-      <Route path={"/:provider"} element={<Login config={config} />} />
+      <Route path={"/:provider"} element={<Login />} />
       <Route
         path={"/:provider/callback"}
         element={<LoginCallback config={config} reload={reload} />}

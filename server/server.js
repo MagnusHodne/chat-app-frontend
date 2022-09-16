@@ -37,15 +37,6 @@ app.use("/api/login", LoginController({ fetchFunc: fetchJSON }));
 app.use("/api/chat", ChatController());
 app.use("/api/user", UserController());
 
-app.use(express.static("../client/dist"));
-app.use((req, res, next) => {
-  if (req.method === "GET" && !req.path.startsWith("/api")) {
-    return res.sendFile(path.resolve("../client/dist/index.html"));
-  } else {
-    next();
-  }
-});
-
 const sockets = [];
 const wsServer = new WebSocketServer({ noServer: true });
 wsServer.on("connection", (socket) => {

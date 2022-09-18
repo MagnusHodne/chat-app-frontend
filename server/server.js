@@ -37,15 +37,6 @@ app.use("/api/login", LoginController({ fetchFunc: fetchJSON }));
 app.use("/api/chat", ChatController());
 app.use("/api/user", UserController());
 
-app.use(express.static("../client/dist"));
-app.use((req, res, next) => {
-  if (req.method === "GET" && !req.path.startsWith("/api")) {
-    return res.sendFile(path.resolve("../client/dist/index.html"));
-  } else {
-    next();
-  }
-});
-
 const sockets = [];
 const wsServer = new WebSocketServer({ noServer: true });
 wsServer.on("connection", (socket) => {
@@ -53,7 +44,7 @@ wsServer.on("connection", (socket) => {
   socket.on("message", async (msg) => handleWebSocketMessage(msg, sockets));
 });
 
-const server = app.listen(process.env.PORT || 3000, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`Started on http://localhost:${server.address().port}`);
   server.on("upgrade", (req, socket, head) => {
     wsServer.handleUpgrade(req, socket, head, (socket) => {

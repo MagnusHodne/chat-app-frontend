@@ -44,7 +44,7 @@ wsServer.on("connection", (socket) => {
   socket.on("message", async (msg) => handleWebSocketMessage(msg, sockets));
 });
 
-const server = app.listen(process.env.PORT || 3000, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`Started on http://localhost:${server.address().port}`);
   server.on("upgrade", (req, socket, head) => {
     wsServer.handleUpgrade(req, socket, head, (socket) => {

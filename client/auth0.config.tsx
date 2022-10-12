@@ -6,13 +6,13 @@ export function Auth0Config({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) {
-  const domain = "https://magnushodne.eu.auth0.com/";
+  const domain = "https://magnushodne.eu.auth0.com";
   const clientId = "JN8jmWPtBrI52sVNAAP5ZHntM4VKAc3L";
-  let redirectUri = "https://dndnotes.trovik.dev/callback";
-  let audience = "https://api.trovik.dev";
+  let redirectUri = "";
+  let audience = "";
 
   if (process.env.NODE_ENV === "development") {
-    redirectUri = "http://localhost:3000/callback";
+    redirectUri = "http://localhost:3000/oauth2/callback";
     audience = "http://localhost:5000";
   }
 

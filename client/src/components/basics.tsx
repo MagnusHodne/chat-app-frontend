@@ -1,11 +1,27 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export function FAIcon({ icon }) {
+type IconProps = { icon: string };
+
+export const FAIcon: React.FC<IconProps> = ({ icon }) => {
   return <i className={`${icon}`}></i>;
-}
+};
 
-export function Button({ title, icon, to, onClick, className }) {
+type ButtonProps = {
+  title: string;
+  icon?: string;
+  to?: string;
+  onClick?: () => void;
+  className?: string;
+};
+
+export const Button: React.FC<ButtonProps> = ({
+  title,
+  icon,
+  to,
+  onClick,
+  className,
+}) => {
   if (to) {
     const navigate = useNavigate();
     onClick = () => {
@@ -22,4 +38,4 @@ export function Button({ title, icon, to, onClick, className }) {
     </button>
   );
   return button();
-}
+};

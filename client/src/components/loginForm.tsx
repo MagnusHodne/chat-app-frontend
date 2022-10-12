@@ -1,6 +1,6 @@
-import React from "react";
 import { Button } from "./basics";
 import { Header } from "./layoutComponents";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function LoginForm() {
   return (
@@ -15,19 +15,19 @@ export function LoginForm() {
           <h1>Welcome!</h1>
           <p>Please log in</p>
           <div className={"w flex w-72 flex-col"}>
-            <Button
-              to={"/login/google"}
-              title={"Log in with Google"}
-              icon={"fa-brands fa-google"}
-            />
-            <Button
-              to={"/login/azure"}
-              title={"Log in with Active Directory"}
-              icon={"fa-brands fa-microsoft"}
-            />
+            <LoginButton />
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+function LoginButton() {
+  const { loginWithRedirect } = useAuth0();
+  const HandleLogin = async () => {
+    await loginWithRedirect({ prompt: "login" });
+  };
+
+  return <Button title={"Login"} onClick={() => HandleLogin()} />;
 }

@@ -1,6 +1,7 @@
 import { Auth0Provider } from "@auth0/auth0-react";
+import * as React from "react";
 
-export function Auth0Config({ children }) {
+export function Auth0Config({ children }: { children: React.ReactNode | React.ReactNode[] }) {
   return (
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN}

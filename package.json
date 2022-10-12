@@ -4,22 +4,16 @@
   "description": "PGR6301 Re-sit exam",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:client && npm run test:server",
-    "test:coverage": "npm run test:coverage:client && npm run test:coverage:server",
+    "test": "npm run test:client",
+    "test:coverage": "npm run test:coverage:client",
     "test:client": "cd client && npm test",
     "test:coverage:client": "cd client && npm run test:coverage",
-    "test:server": "cd server && npm test",
-    "test:coverage:server": "cd server && npm run test:coverage",
-    "build": "npm run build:server && npm run build:client",
+    "build": "npm run build:client",
     "build:client": "cd client && npm run build",
-    "build:server": "cd server && npm run build",
-    "dev": "concurrently npm:dev:client npm:dev:server",
+    "dev": "npm:dev:client",
     "dev:client": "cd client && npm run dev",
-    "dev:server": "cd server && npm run dev",
-    "start": "cd server && npm start",
-    "postinstall": "npm run install:client && npm run install:server",
+    "postinstall": "npm run install:client",
     "install:client": "cd client && npm install --include=dev",
-    "install:server": "cd server && npm install",
     "format": "prettier --write **/*.{js,jsx,ts,tsx,css}",
     "format:check": "prettier --check **/*.{js,jsx,ts,tsx,css}",
     "prepare": "husky install"
@@ -36,8 +30,6 @@
   },
   "homepage": "https://github.com/kristiania-pg6301-2022/pg6301konte-MagnusHodne#readme",
   "devDependencies": {
-    "concurrently": "^7.3.0",
-    "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13"
   }

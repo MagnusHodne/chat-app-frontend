@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FrontPage } from "./pages/frontPage";
 import {
   ErrorComponent,
@@ -10,23 +10,29 @@ import { LoginPage } from "./pages/loginPage";
 import { LoginForm } from "./components/loginForm";
 import { ChatApiContext } from "./chatApiContext";
 import { UserContext } from "./userContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function Application() {
-  const { fetchLogin } = useContext(ChatApiContext);
-  //Storing user as a global variable
-  const { data, error, loading, reload } = useLoading(fetchLogin);
+  const { isLoading, user } = useAuth0();
+  const [userInfo, setUserInfo] = useState(null);
 
-  if (loading) {
+  useEffect(() => {
+    if (!isLoading && user) {
+      setUserInfo(user);
+    }
+  }, [isLoading, user]);
+  //Storing user as a global variable
+
+  if (isLoading) {
     return <LoadingComponent message={"Fetching user data, please wait..."} />;
   }
 
   return (
-    <UserContext.Provider value={{ user: data?.user }}>
+    <UserContext.Provider value={{ user }}>
       <BrowserRouter>
         <Routes>
-          <Route path={"/startlogin"} element={<LoginForm />} />
+          <Route path={"/"} element={<LoginForm />} />
           <Route path={"/*"} element={<FrontPage />} />
-          <Route path={"/login/*"} element={<LoginPage reload={reload} />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

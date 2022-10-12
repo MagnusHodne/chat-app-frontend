@@ -10,7 +10,7 @@
     "test:coverage:client": "cd client && npm run test:coverage",
     "build": "npm run build:client",
     "build:client": "cd client && npm run build",
-    "dev": "npm:dev:client",
+    "dev": "npm run dev:client",
     "dev:client": "cd client && npm run dev",
     "postinstall": "npm run install:client",
     "install:client": "cd client && npm install --include=dev",

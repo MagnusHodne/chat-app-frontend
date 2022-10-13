@@ -1,7 +1,13 @@
-import React from "react";
 import { Content, Header, Sidebar } from "../components/layoutComponents";
+import React from "react";
 
-export function GenericPage({ sidebarContent, mainContent }) {
+export function GenericPage({
+  sidebarContent,
+  mainContent,
+}: {
+  sidebarContent: React.ReactNode | React.ReactNode[];
+  mainContent: React.ReactNode | React.ReactNode[];
+}) {
   return (
     <div
       className={

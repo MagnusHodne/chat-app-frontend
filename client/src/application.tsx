@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import React from "react";
 import { FrontPage } from "./pages/frontPage";
 import {
   ErrorComponent,

@@ -1,5 +1,3 @@
-import React from "react";
-
 export function LoadingComponent({ message = "Loading, please wait..." }) {
   return (
     <div
@@ -13,7 +11,7 @@ export function LoadingComponent({ message = "Loading, please wait..." }) {
   );
 }
 
-export function ErrorComponent({ error }) {
+export function ErrorComponent({ error }: { error: string }) {
   return (
     <div className={"error-component"}>
       <div id={"error-text"}>{error.toString()}</div>

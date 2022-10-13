@@ -1,19 +1,10 @@
 import { Button } from "./basics";
 import { Header } from "./layoutComponents";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 export function LoginForm() {
-  const navigate = useNavigate();
   const { isAuthenticated } = useAuth0();
   console.log("isAuthenticated", isAuthenticated);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/app");
-    }
-  }, [isAuthenticated]);
 
   return (
     <div
@@ -47,10 +38,7 @@ function LoginButton() {
 export function LogoutButton() {
   const { logout } = useAuth0();
   const HandleLogout = async () => {
-    let redirectUri = ""; //TODO - Add link to prod here
-    if (process.env.NODE_ENV === "development") {
-      redirectUri = "http://localhost:3000";
-    }
+    let redirectUri = window.location.origin;
     await logout({ returnTo: redirectUri });
   };
 

@@ -28,8 +28,6 @@ export function Auth0ProviderWithRedirect({
       clientId={clientId}
       redirectUri={redirectUri}
       onRedirectCallback={onRedirectCallback}
-      // Caching in local storage to handle page refreshing. This does make the site more vulnerable to XSS...
-      cacheLocation={"localstorage"}
     >
       {children}
     </Auth0Provider>

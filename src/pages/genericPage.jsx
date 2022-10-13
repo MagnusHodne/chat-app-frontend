@@ -9,8 +9,8 @@ export function GenericPage({ sidebarContent, mainContent }) {
       }
     >
       <Header />
-      <Sidebar content={sidebarContent} />
-      <Content content={mainContent} />
+      <Sidebar>{sidebarContent}</Sidebar>
+      <Content>{mainContent}</Content>
     </div>
   );
 }

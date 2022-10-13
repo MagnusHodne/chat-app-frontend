@@ -1,15 +1,19 @@
-import React, { useContext } from "react";
-import { Button, FAIcon } from "./basics";
-import { ChatApiContext } from "../chatApiContext";
-import { UserContext } from "../userContext";
+import React from "react";
+import { FAIcon } from "./basics";
 import { LogoutButton } from "./loginForm";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export function Content({ content }) {
-  return <div className={"bg-brand-600 min-h-0"}>{content}</div>;
+export function Content({ children }: { children: React.ReactNode }) {
+  return <div className={"bg-brand-600 min-h-0"}>{children}</div>;
 }
-export function PaddedContent({ content, className }) {
-  return <div className={`p-4 ${className}`}>{content}</div>;
+export function PaddedContent({
+  children,
+  className,
+}: {
+  children: React.ReactNode | React.ReactNode[];
+  className?: string;
+}) {
+  return <div className={`p-4 ${className}`}>{children}</div>;
 }
 
 function UserActions() {
@@ -35,6 +39,6 @@ export function Header() {
   );
 }
 
-export function Sidebar({ content }) {
-  return <div className={"bg-brand-800 p-2"}>{content}</div>;
+export function Sidebar({ children }: { children: React.ReactNode }) {
+  return <div className={"bg-brand-800 p-2"}>{children}</div>;
 }

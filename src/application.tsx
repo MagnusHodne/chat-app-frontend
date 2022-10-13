@@ -22,7 +22,7 @@ export function Application() {
   return (
     <Routes>
       <Route path="/" element={<LoginForm />} />
-      <Route path={"/app"} element={<FrontPage />} />
+      <Route path={"/app/*"} element={<FrontPage />} />
       <Route path={"/oauth2/callback"} element={<LoginCallback />} />
     </Routes>
   );

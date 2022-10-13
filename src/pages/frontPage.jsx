@@ -5,7 +5,7 @@ import { ProfilePage } from "./profilePage";
 import { ChatPage } from "./chatPage";
 import { NotFoundPage } from "./notFoundPage";
 import { Button } from "../components/basics";
-import AuthorizedComponent from "../components/authorizedComponent";
+import AuthorizedComponent from "../components/protectedRoute";
 
 export function FrontPage() {
   function ContentRouter() {

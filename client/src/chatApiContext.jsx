@@ -13,9 +13,6 @@ export const ChatApiContext = React.createContext({
    * Fetches login info from the server (body contains both configs for the different providers, as
    * well as the user info (if any))
    */
-  async fetchLogin() {
-    return await fetchJSON("/api/login");
-  },
   async fetchConfig() {
     return await fetchJSON("/api/login/config");
   },

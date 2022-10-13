@@ -6,7 +6,7 @@ import { LogoutButton } from "./loginForm";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function Content({ content }) {
-  return <div className={"min-h-0 bg-thischord-600"}>{content}</div>;
+  return <div className={"bg-brand-600 min-h-0"}>{content}</div>;
 }
 export function PaddedContent({ content, className }) {
   return <div className={`p-4 ${className}`}>{content}</div>;
@@ -21,7 +21,7 @@ export function Header() {
   return (
     <header
       className={
-        "col-span-2 flex flex-row items-center justify-between border-b-2 border-solid border-thischord-900 bg-thischord-600 p-4"
+        "border-brand-900 bg-brand-600 col-span-2 flex flex-row items-center justify-between border-b-2 border-solid p-4"
       }
     >
       <div className={"flex flex-row items-center gap-3"}>
@@ -36,5 +36,5 @@ export function Header() {
 }
 
 export function Sidebar({ content }) {
-  return <div className={"bg-thischord-800 p-2"}>{content}</div>;
+  return <div className={"bg-brand-800 p-2"}>{content}</div>;
 }

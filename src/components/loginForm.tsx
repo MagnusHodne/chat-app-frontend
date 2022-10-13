@@ -13,7 +13,7 @@ export function LoginForm() {
       }
     >
       <Header />
-      <div className={"col-span-2 min-h-0 bg-thischord-700"}>
+      <div className={"bg-brand-700 col-span-2 min-h-0"}>
         <div className={"flex h-full flex-col items-center justify-center"}>
           <h1>Welcome!</h1>
           <p>Please log in</p>

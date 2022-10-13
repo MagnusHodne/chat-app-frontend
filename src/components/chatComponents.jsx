@@ -18,7 +18,7 @@ export function ChatHeader({ name }) {
 function ChatMessageAction({ icon, onClick, className }) {
   return (
     <button
-      className={`border-none px-2 py-1 hover:bg-thischord-500 ${className}`}
+      className={`hover:bg-brand-500 border-none px-2 py-1 ${className}`}
       onClick={() => onClick()}
     >
       <FAIcon icon={icon} />
@@ -32,7 +32,7 @@ function ChatMessageActions({ author, handleDelete }) {
   return (
     <div
       className={
-        "absolute right-2 top-0 -translate-y-1/2 flex-row items-center justify-center self-end overflow-clip rounded border border-solid border-thischord-800 bg-thischord-600"
+        "border-brand-800 bg-brand-600 absolute right-2 top-0 -translate-y-1/2 flex-row items-center justify-center self-end overflow-clip rounded border border-solid"
       }
     >
       <ChatMessageAction
@@ -87,7 +87,7 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
 
   return (
     <div
-      className={`relative flex flex-row gap-4 ${paddingLeft} hover:bg-thischord-700`}
+      className={`relative flex flex-row gap-4 ${paddingLeft} hover:bg-brand-700`}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
@@ -175,7 +175,7 @@ export function ChatComponent({
             >
               <input
                 className={
-                  "flex-1 rounded border-none bg-thischord-500 px-3 py-0 placeholder:text-thischord-300"
+                  "bg-brand-500 placeholder:text-brand-300 flex-1 rounded border-none px-3 py-0"
                 }
                 autoFocus={true}
                 placeholder={`Message #${chatRoom}`}

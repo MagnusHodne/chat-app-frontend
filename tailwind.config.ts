@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        thischord: {
+        brand: {
           100: "#b7c2ce",
           200: "#99aab5",
           300: "#72767d",

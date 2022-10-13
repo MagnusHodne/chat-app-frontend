@@ -1,44 +1,72 @@
 {
-  "name": "exam",
+  "name": "chat-app-frontend",
   "version": "1.0.0",
-  "description": "PGR6301 Re-sit exam",
-  "main": "index.js",
-  "scripts": {
-    "test": "npm run test:client && npm run test:server",
-    "test:coverage": "npm run test:coverage:client && npm run test:coverage:server",
-    "test:client": "cd client && npm test",
-    "test:coverage:client": "cd client && npm run test:coverage",
-    "test:server": "cd server && npm test",
-    "test:coverage:server": "cd server && npm run test:coverage",
-    "build": "npm run build:server && npm run build:client",
-    "build:client": "cd client && npm run build",
-    "build:server": "cd server && npm run build",
-    "dev": "concurrently npm:dev:client npm:dev:server",
-    "dev:client": "cd client && npm run dev",
-    "dev:server": "cd server && npm run dev",
-    "start": "cd server && npm start",
-    "postinstall": "npm run install:client && npm run install:server",
-    "install:client": "cd client && npm install --include=dev",
-    "install:server": "cd server && npm install",
-    "format": "prettier --write **/*.{js,jsx,ts,tsx,css}",
-    "format:check": "prettier --check **/*.{js,jsx,ts,tsx,css}",
-    "prepare": "husky install"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kristiania-pg6301-2022/pg6301konte-MagnusHodne.git"
-  },
-  "keywords": [],
+  "description": "Frontend for chat app portfolio project",
+  "keywords": ["react", "tailwind", "auth0"],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kristiania-pg6301-2022/pg6301konte-MagnusHodne/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagnusHodne/chat-app-frontend.git"
   },
-  "homepage": "https://github.com/kristiania-pg6301-2022/pg6301konte-MagnusHodne#readme",
+  "bugs": {
+    "url": "https://github.com/MagnusHodne/chat-app-frontend/issues"
+  },
+  "homepage": "https://github.com/MagnusHodne/chat-app-frontend#readme",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "dev": "parcel -p 3000 src/index.html",
+    "build": "npm install --include=dev && parcel build src/index.html"
+  },
   "devDependencies": {
-    "concurrently": "^7.3.0",
-    "husky": "^8.0.1",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "buffer": "^6.0.3",
+    "jest": "^27.5.1",
+    "jest-babel": "^1.0.1",
+    "parcel": "^2.7.0",
+    "postcss": "^8.4.16",
     "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.1.13"
+    "prettier-plugin-tailwindcss": "^0.1.13",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.1.8"
+  },
+  "dependencies": {
+    "@auth0/auth0-react": "^1.11.0",
+    "@fortawesome/fontawesome-free": "^6.1.1",
+    "@parcel/transformer-react-refresh-wrap": "^2.7.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.59",
+    "@types/react": "^18.0.20",
+    "@types/react-dom": "^18.0.6",
+    "@types/auth0": "^2.35.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.0",
+    "typescript": "^4.8.4"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "**/*.jsx",
+      "**/*.js",
+      "!dist/**",
+      "!index.jsx",
+      "!coverage/**"
+    ]
   }
 }

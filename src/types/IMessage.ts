@@ -1,8 +1,9 @@
-import { IUser } from "./user";
+import { IUser } from "./IUser";
 
 export interface IMessage {
   _id: string;
   user: IUser;
   message: string;
-  created: string;
+  created: Date;
+  updated: Date;
 }

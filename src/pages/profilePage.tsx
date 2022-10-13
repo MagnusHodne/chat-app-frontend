@@ -8,7 +8,7 @@ import {
 } from "../components/feedbackComponents";
 import { Avatar } from "../components/avatar";
 import { PaddedContent } from "../components/layoutComponents";
-import { IUser } from "../types/user";
+import { IUser } from "../types/IUser";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function ProfilePage() {

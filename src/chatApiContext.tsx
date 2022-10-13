@@ -1,6 +1,6 @@
 import React from "react";
 import { deleteJSON, fetchJSON, putJSON } from "./lib/fetchUtils";
-import { IUser } from "./types/user";
+import { IUser } from "./types/IUser";
 
 export const ChatApiContext = React.createContext({
   /*==== DATABASE OPERATIONS =====*/

@@ -7,7 +7,8 @@ import {
 import { ChatApiContext } from "../chatApiContext";
 import { UserContext } from "../userContext";
 import { ChatComponent } from "../components/chat";
-import { IMessage } from "../types/message";
+import { IMessage } from "../types/IMessage";
+import { IChatResponse } from "../types/IChatResponse";
 
 function ChatConnection({ initialMessages }: { initialMessages: IMessage[] }) {
   const { user } = useContext(UserContext);
@@ -24,16 +25,12 @@ function ChatConnection({ initialMessages }: { initialMessages: IMessage[] }) {
       console.log("Opened", event);
     };
     ws.onmessage = (event) => {
-      const res = JSON.parse(event.data);
+      const res: IChatResponse = JSON.parse(event.data);
       if (res.action === "create") {
-        const { message, user, created, _id } = res;
-        setMessages((oldMessages) => [
-          ...oldMessages,
-          { message, user, created, _id },
-        ]);
+        setMessages((oldMessages) => [...oldMessages, res.message]);
       }
       if (res.action === "delete") {
-        const { _id } = res;
+        const { _id } = res.message;
         setMessages((oldMessages) =>
           oldMessages.filter((msg) => msg._id !== _id)
         );

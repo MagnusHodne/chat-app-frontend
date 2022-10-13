@@ -1,5 +1,5 @@
 import { FAIcon } from "../basics";
-import { IUser } from "../../types/user";
+import { IUser } from "../../types/IUser";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function ChatMessageAction({

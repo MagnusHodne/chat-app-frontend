@@ -1,4 +1,4 @@
-import { IMessage } from "../../types/message";
+import { IMessage } from "../../types/IMessage";
 import { useState } from "react";
 import { Avatar } from "../avatar";
 import { ChatMessageActions } from "./chatMessageActions";

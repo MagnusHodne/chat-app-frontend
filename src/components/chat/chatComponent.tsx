@@ -1,4 +1,4 @@
-import { IMessage } from "../../types/message";
+import { IMessage } from "../../types/IMessage";
 import React, { useState } from "react";
 import { PaddedContent } from "../layoutComponents";
 import { ChatHeader, ChatMessage } from "./index";

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
-import { Login, LoginCallback, Logout } from "../src/pages/loginPage";
+import { Login, LoginCallback, Logout } from "../src/legacy/loginPage";
 import { MemoryRouter } from "react-router-dom";
 import { ChatApiContext } from "../src/chatApiContext";
 

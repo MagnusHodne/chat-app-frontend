@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { Application } from "./application";
-import { Auth0ProviderWithRedirect } from "../auth0ProviderWithRedirect";
+import { Auth0ProviderWithRedirect } from "./components/auth0ProviderWithRedirect";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const root = ReactDOM.createRoot(

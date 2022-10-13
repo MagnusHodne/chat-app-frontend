@@ -3,6 +3,7 @@ import { Button, FAIcon } from "./basics";
 import { ChatApiContext } from "../chatApiContext";
 import { UserContext } from "../userContext";
 import { LogoutButton } from "./loginForm";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function Content({ content }) {
   return <div className={"min-h-0 bg-thischord-600"}>{content}</div>;
@@ -12,17 +13,9 @@ export function PaddedContent({ content, className }) {
 }
 
 function UserActions() {
-  const { user } = useContext(UserContext);
-  const { verifyUser } = useContext(ChatApiContext);
-  if (!verifyUser(user)) {
-    return <></>;
-  }
+  const { isAuthenticated } = useAuth0();
 
-  return (
-    <>
-      <LogoutButton />
-    </>
-  );
+  return <>{isAuthenticated && <LogoutButton />}</>;
 }
 export function Header() {
   return (

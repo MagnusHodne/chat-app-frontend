@@ -15,7 +15,7 @@ export const LoginCallback = () => {
       //TODO - make call to new user endpoint here, let backend handle registration if new user
       //await CallBackendApi("user/new", "post", user)
 
-      navigate("/home");
+      navigate("/app");
     };
     processLogin();
   }, []);

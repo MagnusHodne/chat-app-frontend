@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Button, FAIcon } from "./basics";
 import { ChatApiContext } from "../chatApiContext";
 import { UserContext } from "../userContext";
+import { LogoutButton } from "./loginForm";
 
 export function Content({ content }) {
   return <div className={"min-h-0 bg-thischord-600"}>{content}</div>;
@@ -19,11 +20,7 @@ function UserActions() {
 
   return (
     <>
-      <Button
-        to={"/login/endsession"}
-        title={"Log out"}
-        className={"hover:bg-red-800"}
-      />
+      <LogoutButton />
     </>
   );
 }

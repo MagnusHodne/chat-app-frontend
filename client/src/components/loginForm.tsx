@@ -29,5 +29,26 @@ function LoginButton() {
     await loginWithRedirect({ prompt: "login" });
   };
 
-  return <Button title={"Login"} onClick={() => HandleLogin()} />;
+  return <Button title={"Login"} onClick={HandleLogin} />;
+}
+
+export function LogoutButton() {
+  const { logout } = useAuth0();
+  const HandleLogout = async () => {
+    let redirectUri = ""; //TODO - Add link to prod here
+    if (process.env.NODE_ENV === "development") {
+      redirectUri = "http://localhost:3000";
+    }
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
+    await logout({ returnTo: redirectUri });
+  };
+
+  return (
+    <Button
+      title={"Logout"}
+      className={"hover:bg-red-800"}
+      onClick={HandleLogout}
+    />
+  );
 }

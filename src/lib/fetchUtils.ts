@@ -1,4 +1,4 @@
-export async function postJSON(url, object) {
+export async function postJSON(url: string, object: object) {
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -12,7 +12,7 @@ export async function postJSON(url, object) {
   return await res.json();
 }
 
-export async function deleteJSON(url, object) {
+export async function deleteJSON(url: string, object: object) {
   const res = await fetch(url, {
     method: "DELETE",
     headers: {
@@ -24,7 +24,7 @@ export async function deleteJSON(url, object) {
     throw new Error(`Failed to delete ${res.status}: ${res.statusText}`);
   }
 }
-export async function postJSONNoReturn(url, object) {
+export async function postJSONNoReturn(url: string, object: object) {
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -37,7 +37,7 @@ export async function postJSONNoReturn(url, object) {
   }
 }
 
-export async function putJSON(url, object) {
+export async function putJSON(url: string, object: object) {
   const res = await fetch(url, {
     method: "PUT",
     headers: {
@@ -50,7 +50,7 @@ export async function putJSON(url, object) {
   }
 }
 
-export async function fetchJSON(url) {
+export async function fetchJSON(url: string) {
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`Failed to load ${res.status}: ${res.statusText}`);

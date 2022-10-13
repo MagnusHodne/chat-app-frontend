@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 
-export function useLoading(loadingFunction, deps = []) {
+export function useLoading<Type>(
+  loadingFunction: () => Promise<Type>,
+  deps = []
+) {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
-  const [data, setData] = useState();
+  const [error, setError] = useState<any>();
+  const [data, setData] = useState<Type>();
 
   async function load() {
     try {

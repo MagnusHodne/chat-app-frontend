@@ -1,22 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoading } from "../lib/useLoading";
 import {
   ErrorComponent,
   LoadingComponent,
 } from "../components/feedbackComponents";
 import { ChatApiContext } from "../chatApiContext";
-import { ChatComponent } from "../components/chatComponents";
 import { UserContext } from "../userContext";
+import { ChatComponent } from "../components/chat";
+import { IMessage } from "../types/message";
 
-function ChatConnection({ initialMessages }) {
+function ChatConnection({ initialMessages }: { initialMessages: IMessage[] }) {
   const { user } = useContext(UserContext);
   const [messages, setMessages] = useState(initialMessages);
-  const [ws, setWs] = useState({});
+  const [ws, setWs] = useState<WebSocket | null>();
 
   //Establishes a websocket on component mount
   useEffect(() => {
     const protocol = window.location.protocol;
-    const ws = new WebSocket(
+    const ws: WebSocket = new WebSocket(
       (protocol === "http:" ? "ws://" : "wss://") + window.location.host
     );
     ws.onopen = (event) => {
@@ -41,11 +42,11 @@ function ChatConnection({ initialMessages }) {
     setWs(ws);
   }, []);
 
-  function handleNewMessage(message) {
-    ws.send(JSON.stringify({ action: "create", message, user }));
+  function handleNewMessage(message: string) {
+    ws?.send(JSON.stringify({ action: "create", message, user }));
   }
-  function handleDeleteMessage(_id) {
-    ws.send(JSON.stringify({ action: "delete", _id }));
+  function handleDeleteMessage(_id: string) {
+    ws?.send(JSON.stringify({ action: "delete", _id }));
   }
 
   return (

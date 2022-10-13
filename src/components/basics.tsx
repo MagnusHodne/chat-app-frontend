@@ -30,10 +30,10 @@ export const Button: React.FC<ButtonProps> = ({
   }
   const button = () => (
     <button
-      className={`m-1 flex items-center justify-center gap-2 rounded-md bg-thischord-500 px-3 py-2 text-thischord-100 hover:bg-thischord-400 ${className}`}
+      className={`bg-brand-500 text-brand-100 hover:bg-brand-400 m-1 flex items-center justify-center gap-2 rounded-md px-3 py-2 ${className}`}
       onClick={onClick}
     >
-      {icon && <i className={`shrink-0 text-thischord-100 ${icon}`} />}
+      {icon && <i className={`text-brand-100 shrink-0 ${icon}`} />}
       {title}
     </button>
   );

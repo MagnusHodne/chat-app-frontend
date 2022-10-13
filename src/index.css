@@ -9,13 +9,13 @@
     @apply w-2.5;
   }
   .scrollbar::-webkit-scrollbar-track {
-    @apply bg-thischord-800;
+    @apply bg-brand-800;
     @apply rounded-full;
     @apply my-2;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-thischord-900;
+    @apply bg-brand-900;
     @apply rounded-full;
   }
 

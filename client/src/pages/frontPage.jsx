@@ -5,7 +5,7 @@ import { ProfilePage } from "./profilePage";
 import { ChatPage } from "./chatPage";
 import { NotFoundPage } from "./notFoundPage";
 import { Button } from "../components/basics";
-import { AuthorizedComponent } from "../components/authorizedComponent";
+import AuthorizedComponent from "../components/authorizedComponent";
 
 export function FrontPage() {
   function ContentRouter() {
@@ -27,13 +27,11 @@ export function FrontPage() {
     );
   }
   return (
-    <AuthorizedComponent
-      successComponent={
-        <GenericPage
-          mainContent={<ContentRouter />}
-          sidebarContent={<SidebarContent />}
-        ></GenericPage>
-      }
-    />
+    <AuthorizedComponent>
+      <GenericPage
+        mainContent={<ContentRouter />}
+        sidebarContent={<SidebarContent />}
+      ></GenericPage>
+    </AuthorizedComponent>
   );
 }

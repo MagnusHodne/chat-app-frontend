@@ -1,7 +1,6 @@
 import { FAIcon } from "./basics";
-import React from "react";
 
-export function Avatar({ src }) {
+export function Avatar({ src }: { src: string }) {
   if (src === "")
     return (
       <div

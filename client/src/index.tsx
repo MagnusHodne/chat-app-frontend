@@ -1,12 +1,15 @@
 import ReactDOM from "react-dom/client";
 import { Application } from "./application";
-import { Auth0Config } from "../auth0.config";
+import { Auth0ProviderWithRedirect } from "../auth0ProviderWithRedirect";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Auth0Config>
-    <Application />
-  </Auth0Config>
+  <Router>
+    <Auth0ProviderWithRedirect>
+      <Application />
+    </Auth0ProviderWithRedirect>
+  </Router>
 );

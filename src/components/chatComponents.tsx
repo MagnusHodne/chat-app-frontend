@@ -1,12 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Button, FAIcon } from "./basics";
-import { UserContext } from "../userContext";
 import { Avatar } from "./avatar";
 import { PaddedContent } from "./layoutComponents";
+import { useAuth0 } from "@auth0/auth0-react";
+import { IUser } from "../types/user";
+import { IMessage } from "../types/message";
 
 const paddingLeft = "pl-4";
 
-export function ChatHeader({ name }) {
+export function ChatHeader({ name }: { name: string }) {
   return (
     <div className={`flex flex-row items-center gap-2 ${paddingLeft}`}>
       <FAIcon icon={"fa-solid fa-hashtag"} />
@@ -15,7 +17,15 @@ export function ChatHeader({ name }) {
   );
 }
 
-function ChatMessageAction({ icon, onClick, className }) {
+function ChatMessageAction({
+  icon,
+  onClick,
+  className,
+}: {
+  icon: string;
+  onClick: () => void;
+  className?: string;
+}) {
   return (
     <button
       className={`hover:bg-brand-500 border-none px-2 py-1 ${className}`}
@@ -26,9 +36,15 @@ function ChatMessageAction({ icon, onClick, className }) {
   );
 }
 
-function ChatMessageActions({ author, handleDelete }) {
-  const { user } = useContext(UserContext);
-  const userIsAuthor = author.sub === user.sub;
+function ChatMessageActions({
+  author,
+  handleDelete,
+}: {
+  author: IUser;
+  handleDelete: () => void;
+}) {
+  const { user } = useAuth0();
+  const userIsAuthor = author.sub === user?.sub;
   return (
     <div
       className={
@@ -59,8 +75,16 @@ function ChatMessageActions({ author, handleDelete }) {
   );
 }
 
-function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
-  const created = new Date(info.created);
+function ChatMessage({
+  message,
+  onDeleteMessage,
+  displayInfo,
+}: {
+  message: IMessage;
+  onDeleteMessage: (id: string) => void;
+  displayInfo: boolean;
+}) {
+  const created = new Date(message.created);
   const now = new Date();
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
@@ -92,20 +116,20 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
       onMouseLeave={() => setShowActions(false)}
     >
       <div className={`mt-2 w-10 p-0 ${displayInfo && "h-10"}`}>
-        {displayInfo && <Avatar src={info.user.picture} />}
+        {displayInfo && <Avatar src={message.user.picture} />}
       </div>
       <div className={"flex flex-col"}>
         {showActions && (
           <ChatMessageActions
-            author={info.user}
-            handleDelete={() => onDeleteMessage(info._id)}
+            author={message.user}
+            handleDelete={() => onDeleteMessage(message._id)}
           />
         )}
         {displayInfo && (
           <div className={"mt-2 flex gap-2 pb-0"}>
             <div className={"inline-block"}>
               <span className={"font-extrabold hover:underline"}>
-                {info.user.name}
+                {message.user.name}
               </span>
             </div>
 
@@ -116,7 +140,7 @@ function ChatMessage({ message, info, onDeleteMessage, displayInfo }) {
             </div>
           </div>
         )}
-        <div className={"py-0.5 px-0"}>{message}</div>
+        <div className={"py-0.5 px-0"}>{message.message}</div>
       </div>
     </div>
   );
@@ -127,10 +151,15 @@ export function ChatComponent({
   onNewMessage,
   onDeleteMessage,
   chatRoom = "main",
+}: {
+  messages: IMessage[];
+  onNewMessage: (message: string) => void;
+  onDeleteMessage: (id: string) => void;
+  chatRoom?: string;
 }) {
   const [message, setMessage] = useState("");
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     onNewMessage(message);
     setMessage("");
@@ -143,14 +172,14 @@ export function ChatComponent({
         <>
           <ChatHeader name={chatRoom} />
           <div className={"scrollbar overflow-y-auto overflow-x-hidden pt-3"}>
-            {messages.map(({ message, user, created, _id }, index) => {
+            {messages.map((message, index) => {
               let displayInfo = false;
               if (index === 0) {
                 displayInfo = true;
-              } else if (messages[index - 1].user.sub !== user.sub) {
+              } else if (messages[index - 1].user.sub !== message.user.sub) {
                 displayInfo = true;
               } else if (
-                new Date(created).getTime() -
+                new Date(message.created).getTime() -
                   new Date(messages[index - 1].created).getTime() >
                 1000 * 3600
               ) {
@@ -160,9 +189,8 @@ export function ChatComponent({
               return (
                 <ChatMessage
                   message={message}
-                  info={{ user, created, _id }}
                   displayInfo={displayInfo}
-                  key={_id}
+                  key={message._id}
                   onDeleteMessage={onDeleteMessage}
                 />
               );

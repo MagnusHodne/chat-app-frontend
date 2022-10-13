@@ -5,7 +5,7 @@ import { ProfilePage } from "./profilePage";
 import { ChatPage } from "./chatPage";
 import { NotFoundPage } from "./notFoundPage";
 import { Button } from "../components/basics";
-import AuthorizedComponent from "../components/protectedRoute";
+import ProtectedRoute from "../components/protectedRoute";
 
 export function FrontPage() {
   function ContentRouter() {
@@ -27,11 +27,11 @@ export function FrontPage() {
     );
   }
   return (
-    <AuthorizedComponent>
+    <ProtectedRoute>
       <GenericPage
         mainContent={<ContentRouter />}
         sidebarContent={<SidebarContent />}
       ></GenericPage>
-    </AuthorizedComponent>
+    </ProtectedRoute>
   );
 }

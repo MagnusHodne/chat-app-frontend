@@ -21,9 +21,9 @@ export function Application() {
   }
   return (
     <Routes>
-      <Route path={"/"} element={<LoginForm />} />
+      <Route path="/" element={<LoginForm />} />
+      <Route path={"/app"} element={<FrontPage />} />
       <Route path={"/oauth2/callback"} element={<LoginCallback />} />
-      <Route path={"/*"} element={<FrontPage />} />
     </Routes>
   );
 }

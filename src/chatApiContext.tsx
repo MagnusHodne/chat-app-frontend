@@ -4,7 +4,7 @@ import { deleteJSON, fetchJSON, putJSON } from "./lib/fetchUtils";
 export const ChatApiContext = React.createContext({
   /*==== DATABASE OPERATIONS =====*/
   async fetchChatLog() {
-    return await fetchJSON("/api/v1/chat");
+    return await fetchJSON("/api/v1/chats");
   },
   async fetchUserInfo({ sub }: { sub: string }) {
     return await fetchJSON(`/api/v1/user?sub=${sub}`);

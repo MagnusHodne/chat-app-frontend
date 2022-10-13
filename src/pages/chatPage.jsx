@@ -5,8 +5,8 @@ import {
   LoadingComponent,
 } from "../components/feedbackComponents";
 import { ChatApiContext } from "../chatApiContext";
-import { ChatComponent } from "../components/chatComponents";
 import { UserContext } from "../userContext";
+import { ChatComponent } from "../components/chat";
 
 function ChatConnection({ initialMessages }) {
   const { user } = useContext(UserContext);

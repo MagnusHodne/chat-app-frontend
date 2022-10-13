@@ -1,8 +1,16 @@
 import { Button } from "./basics";
 import { Header } from "./layoutComponents";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth0();
+
+  if (isAuthenticated) {
+    navigate("/home");
+  }
+
   return (
     <div
       className={
@@ -25,10 +33,10 @@ export function LoginForm() {
 
 function LoginButton() {
   const { loginWithRedirect } = useAuth0();
+
   const HandleLogin = async () => {
     await loginWithRedirect({ prompt: "login" });
   };
-
   return <Button title={"Login"} onClick={HandleLogin} />;
 }
 
@@ -39,8 +47,6 @@ export function LogoutButton() {
     if (process.env.NODE_ENV === "development") {
       redirectUri = "http://localhost:3000";
     }
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("user");
     await logout({ returnTo: redirectUri });
   };
 

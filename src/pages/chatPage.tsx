@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useLoading } from "../lib/useLoading";
 import {
   ErrorComponent,
   LoadingComponent,
 } from "../components/feedbackComponents";
-import { ChatApiContext } from "../chatApiContext";
 import { UserContext } from "../userContext";
+import { ChatApiContext } from "../chatApiContext";
 import { ChatComponent } from "../components/chat";
 import { IMessage } from "../types/IMessage";
 import { IChatResponse } from "../types/IChatResponse";
@@ -57,7 +58,11 @@ function ChatConnection({ initialMessages }: { initialMessages: IMessage[] }) {
 
 export function ChatPage() {
   const { fetchChatLog } = useContext(ChatApiContext);
-  const { data, loading, error } = useLoading(fetchChatLog);
+  const { getAccessTokenSilently } = useAuth0();
+  const { data, loading, error } = useLoading(
+    async () => fetchChatLog(await getAccessTokenSilently()),
+    [getAccessTokenSilently]
+  );
   if (loading)
     return <LoadingComponent message={"Fetching chat log, please wait..."} />;
   if (error)

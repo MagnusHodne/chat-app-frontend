@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export function useLoading<Type>(
   loadingFunction: () => Promise<Type>,
-  deps = []
+  deps: any[] = []
 ) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>();

@@ -4,8 +4,10 @@ import { IUser } from "./types/IUser";
 
 export const ChatApiContext = React.createContext({
   /*==== DATABASE OPERATIONS =====*/
-  async fetchChatLog() {
-    return await fetchJSON("/api/v1/chats");
+  async fetchChatLog(token: string) {
+    return await fetchJSON("/api/v1/chats", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
   async fetchUserInfo({ sub }: { sub: string | undefined }): Promise<IUser> {
     return await fetchJSON(`/api/v1/user?sub=${sub}`);

@@ -50,8 +50,8 @@ export async function putJSON(url: string, object: object) {
   }
 }
 
-export async function fetchJSON(url: string) {
-  const res = await fetch(url);
+export async function fetchJSON(url: string, options?: RequestInit) {
+  const res = await fetch(url, options);
   if (!res.ok) {
     throw new Error(`Failed to load ${res.status}: ${res.statusText}`);
   }

@@ -28,6 +28,7 @@ export function Auth0ProviderWithRedirect({
       clientId={clientId}
       redirectUri={redirectUri}
       onRedirectCallback={onRedirectCallback}
+      audience={audience}
     >
       {children}
     </Auth0Provider>

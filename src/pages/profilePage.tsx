@@ -20,7 +20,7 @@ export function ProfilePage() {
   if (loading)
     return <LoadingComponent message={"Fetching user bio, please wait..."} />;
   if (error) return <ErrorComponent error={"Unable to fetch user bio"} />;
-  return <ProfileCard userinfo={data!!} initBio={data?.bio || ""} />;
+  return <ProfileCard userinfo={data!!} initBio={data?.description || ""} />;
 }
 
 function ProfileCard({

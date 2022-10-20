@@ -1,13 +1,21 @@
 import React from "react";
-import { deleteJSON, fetchJSON, putJSON } from "./lib/fetchUtils";
+import {
+  deleteJSON,
+  fetchJSON,
+  fetchJSONWithToken,
+  postJSONWithToken,
+  putJSON,
+} from "./lib/fetchUtils";
 import { IUser } from "./types/IUser";
 
 export const ChatApiContext = React.createContext({
-  /*==== DATABASE OPERATIONS =====*/
+  /*==== API OPERATIONS =====*/
+  async registerLogin(user: any, token: string) {
+    console.log(`Registering login with user: ${JSON.stringify(user)}`);
+    return await postJSONWithToken("/api/v1/user/login", token, user);
+  },
   async fetchChatLog(token: string) {
-    return await fetchJSON("/api/v1/chats", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return await fetchJSONWithToken("/api/v1/chats", token);
   },
   async fetchUserInfo({ sub }: { sub: string | undefined }): Promise<IUser> {
     return await fetchJSON(`/api/v1/user?sub=${sub}`);

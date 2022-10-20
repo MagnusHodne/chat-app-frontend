@@ -1,23 +1,24 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import {
   ErrorComponent,
   LoadingComponent,
 } from "../components/feedbackComponents";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+import { ChatApiContext } from "../chatApiContext";
 
 export const LoginCallback = () => {
-  const { error } = useAuth0();
+  const { error, user, getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();
-
+  const { registerLogin } = useContext(ChatApiContext);
   useEffect(() => {
     const processLogin = async () => {
       //TODO - make call to new user endpoint here, let backend handle registration if new user
-      //await CallBackendApi("user/new", "post", user)
+      await registerLogin(user, await getAccessTokenSilently());
 
       navigate("/app");
     };
-    processLogin();
+    processLogin().then();
   }, []);
 
   if (error) {

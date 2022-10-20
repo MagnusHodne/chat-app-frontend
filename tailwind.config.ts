@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+// @ts-ignore
 module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
